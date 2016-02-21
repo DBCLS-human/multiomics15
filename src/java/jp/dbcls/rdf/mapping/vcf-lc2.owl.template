@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl              "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd              "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdf              "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY rdfs             "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY obo              "http://purl.obolibrary.org/obo/" >
+    <!ENTITY dc               "http://purl.org/dc/terms/" >
+    <!ENTITY kero             "http://dbtss.hgc.jp/rdf/ontology/" >
+    <!ENTITY faldo            "http://biohackathon.org/resource/faldo#" >
+    <!ENTITY dbsnp            "http://info.identifiers.org/dbsnp/" >
+    <!ENTITY ncbisnp          "http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" >
+    <!ENTITY ensemblvariation "https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#" >
+]>
+<rdf:RDF xmlns="http://dbtss.hgc.jp/rdf/ontology#"
+        xml:base="http://dbtss.hgc.jp/rdf/ontology"
+        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+        xmlns:owl="http://www.w3.org/2002/07/owl#"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:obo="http://purl.obolibrary.org/obo/"
+        xmlns:dc="http://purl.org/dc/terms/"
+        xmlns:kero="http://dbtss.hgc.jp/rdf/ontology/"
+        xmlns:faldo="http://biohackathon.org/resource/faldo#"
+        xmlns:dbsnp="http://info.identifiers.org/dbsnp/"
+        xmlns:ncbisnp="http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs="
+        xmlns:ensemblvariation="https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#" >
+    <owl:Ontology rdf:about="http://dbtss.hgc.jp/rdf/ontology"/>
+    <owl:DatatypeProperty rdf:about="kero:hasSNV"/>
+    <owl:DatatypeProperty rdf:about="rdfs:label"/>
+    <owl:DatatypeProperty rdf:about="kero:additionalInformation"/>
+    <owl:DatatypeProperty rdf:about="kero:alleleFrequency"/>
+    <owl:DatatypeProperty rdf:about="kero:allelicDepth"/>
+    <owl:DatatypeProperty rdf:about="kero:dbsnpID"/>
+    <owl:DatatypeProperty rdf:about="kero:genotype"/>
+    <owl:DatatypeProperty rdf:about="kero:genotypeData"/>
+    <owl:DatatypeProperty rdf:about="kero:quality"/>
+    <owl:DatatypeProperty rdf:about="dc:identifier"/>
+    <owl:DatatypeProperty rdf:about="rdfs:seeAlso"/>
+    <owl:DatatypeProperty rdf:about="ensemblvariation:hasAllele"/>
+    <owl:DatatypeProperty rdf:about="faldo:location"/>
+    <owl:DatatypeProperty rdf:about="faldo:begin"/>
+    <owl:DatatypeProperty rdf:about="faldo:end"/>
+    <owl:DatatypeProperty rdf:about="faldo:position"/>
+    <owl:DatatypeProperty rdf:about="faldo:reference"/>
+    <owl:Class rdf:about="kero:Experiment"/>
+    <owl:Class rdf:about="obo:SO0001483"/>
+    <owl:Class rdf:about="ensemblvariation:referenceAllele"/>
+    <owl:Class rdf:about="ensemblvariation:ancestralAllele"/>
+    <owl:Class rdf:about="ensemblvariation:derivedAllele"/>
+    <owl:Class rdf:about="faldo:Region"/>
+    <owl:Class rdf:about="faldo:ExactPosition"/>
+    <owl:Class rdf:about="faldo:ForwardStrandPosition"/>
+</rdf:RDF>

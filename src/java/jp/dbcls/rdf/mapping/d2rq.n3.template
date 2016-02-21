@@ -1,0 +1,740 @@
+@prefix map: <#> .
+@prefix db: <> .
+@prefix vocab: <vocab/> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix kero: <http://dbtss.hgc.jp/rdf/ontology/> .
+@prefix faldo: <http://biohackathon.org/resource/faldo#> .
+@prefix dbsnp: <http://info.identifiers.org/dbsnp/> .
+@prefix ncbisnp: <http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=> .
+@prefix ensemblvariation: <https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#> .
+
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+	d2rq:jdbcDSN "jdbc:mysql://{{SQLServer}}/{{Database}}";
+	d2rq:username "{{User}}";
+	d2rq:password "{{Password}}";
+	jdbc:autoReconnect "true";
+	jdbc:zeroDateTimeBehavior "convertToNull";
+	.
+
+[BSDataTable]
+# {{BSDataTable}}
+map:{{BSDataTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{BSDataTable}}/@@{{BSDataTable}}.bs_data_id@@";
+	d2rq:class vocab:{{BSDataTable}};
+	d2rq:classDefinitionLabel "{{BSDataTable}}";
+	.
+map:{{BSDataTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{BSDataTable}};
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{BSDataTable}} #@@{{BSDataTable}}.bs_data_id@@";
+	.
+map:{{BSDataTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{BSDataTable}};
+	d2rq:property vocab:{{BSDataTable}}_id;
+	d2rq:propertyDefinitionLabel "{{BSDataTable}} bs_data_id";
+	d2rq:column "{{BSDataTable}}.bs_data_id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{BSDataTable}}_bin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{BSDataTable}};
+	d2rq:property vocab:{{BSDataTable}}_bin;
+	d2rq:propertyDefinitionLabel "bs_data_9606_LC2ad bin";
+	d2rq:column "bs_data_9606_LC2ad.bin";
+	d2rq:datatype xsd:integer;
+	.
+map:{{BSDataTable}}_chr a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{BSDataTable}};
+	d2rq:property vocab:{{BSDataTable}}_chr;
+	d2rq:propertyDefinitionLabel "{{BSDataTable}} chr";
+	d2rq:column "{{BSDataTable}}.chr";
+	.
+map:{{BSDataTable}}_pos a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{BSDataTable}};
+	d2rq:property vocab:{{BSDataTable}}_pos;
+	d2rq:propertyDefinitionLabel "{{BSDataTable}} pos";
+	d2rq:column "{{BSDataTable}}.pos";
+	d2rq:datatype xsd:integer;
+	.
+map:{{BSDataTable}}_cg_num a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{BSDataTable}};
+	d2rq:property vocab:{{BSDataTable}}_cg_num;
+	d2rq:propertyDefinitionLabel "{{BSDataTable}} cg_num";
+	d2rq:column "{{BSDataTable}}.cg_num";
+	d2rq:datatype xsd:integer;
+	.
+map:{{BSDataTable}}_ca_num a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{BSDataTable}};
+	d2rq:property vocab:{{BSDataTable}}_ca_num;
+	d2rq:propertyDefinitionLabel "{{BSDataTable}} ca_num";
+	d2rq:column "{{BSDataTable}}.ca_num";
+	d2rq:datatype xsd:integer;
+	.
+[/BSDataTable]
+
+[ChipInfTable]
+# {{ChipInfTable}}
+map:{{ChipInfTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{ChipInfTable}}/@@{{ChipInfTable}}.id@@";
+	d2rq:class vocab:{{ChipInfTable}};
+	d2rq:classDefinitionLabel "{{ChipInfTable}}";
+	.
+map:{{ChipInfTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChipInfTable}}
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{ChipInfTable}} #@@{{ChipInfTable}}.id@@";
+	.
+map:{{ChipInfTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChipInfTable}};
+	d2rq:property vocab:{{ChipInfTable}}_id;
+	d2rq:propertyDefinitionLabel "{{ChipInfTable}} id";
+	d2rq:column "{{ChipInfTable}}.id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChipInfTable}}_bin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChipInfTable}};
+	d2rq:property vocab:{{ChipInfTable}}bin;
+	d2rq:propertyDefinitionLabel "{{ChipInfTable}} bin";
+	d2rq:column "{{ChipInfTable}}.bin";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChipInfTable}}_chr a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChipInfTable}};
+	d2rq:property vocab:{{ChipInfTable}}_chr;
+	d2rq:propertyDefinitionLabel "{{ChipInfTable}} chr";
+	d2rq:column "{{ChipInfTable}}.chr";
+	.
+map:{{ChipInfTable}}_start a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChipInfTable}};
+	d2rq:property vocab:{{ChipInfTable}}_start;
+	d2rq:propertyDefinitionLabel "{{ChipInfTable}} start";
+	d2rq:column "{{ChipInfTable}}.start";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChipInfTable}}_end a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChipInfTable}};
+	d2rq:property vocab:{{ChipInfTable}}_end;
+	d2rq:propertyDefinitionLabel "{{ChipInfTable}} end";
+	d2rq:column "{{ChipInfTable}}.end";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChipInfTable}}_num a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChipInfTable}};
+	d2rq:property vocab:{{ChipInfTable}}_num;
+	d2rq:propertyDefinitionLabel "{{ChipInfTable}} num";
+	d2rq:column "{{ChipInfTable}}.num";
+	d2rq:datatype xsd:integer;
+	.
+[/ChipInfTable]
+
+[ChromhmmInfTable]
+# {{ChromhmmInfTable}}
+map:{{ChromhmmInfTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{ChromhmmInfTable}}/@@{{ChromhmmInfTable}}.id@@";
+	d2rq:class vocab:{{ChromhmmInfTable}};
+	d2rq:classDefinitionLabel "{{ChromhmmInfTable}}";
+	.
+map:{{ChromhmmInfTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{ChromhmmInfTable}} #@@{{ChromhmmInfTable}}.id@@";
+	.
+map:{{ChromhmmInfTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property vocab:{{ChromhmmInfTable}}_id;
+	d2rq:propertyDefinitionLabel "{{ChromhmmInfTable}} id";
+	d2rq:column "{{ChromhmmInfTable}}.id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChromhmmInfTable}}_bin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property vocab:{{ChromhmmInfTable}}_bin;
+	d2rq:propertyDefinitionLabel "{{ChromhmmInfTable}} bin";
+	d2rq:column "{{ChromhmmInfTable}}.bin";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChromhmmInfTable}}_chr a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property vocab:{{ChromhmmInfTable}}_chr;
+	d2rq:propertyDefinitionLabel "{{ChromhmmInfTable}} chr";
+	d2rq:column "{{ChromhmmInfTable}}.chr";
+	.
+map:{{ChromhmmInfTable}}_start a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property vocab:{{ChromhmmInfTable}}_start;
+	d2rq:propertyDefinitionLabel "{{ChromhmmInfTable}} start";
+	d2rq:column "{{ChromhmmInfTable}}.start";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChromhmmInfTable}}_end a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property vocab:{{ChromhmmInfTable}}_end;
+	d2rq:propertyDefinitionLabel "{{ChromhmmInfTable}} end";
+	d2rq:column "{{ChromhmmInfTable}}.end";
+	d2rq:datatype xsd:integer;
+	.
+map:{{ChromhmmInfTable}}_type a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property vocab:{{ChromhmmInfTable}}_type;
+	d2rq:propertyDefinitionLabel "{{ChromhmmInfTable}} type";
+	d2rq:column "{{ChromhmmInfTable}}.type";
+	.
+map:{{ChromhmmInfTable}}_color a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{ChromhmmInfTable}};
+	d2rq:property vocab:{{ChromhmmInfTable}}_color;
+	d2rq:propertyDefinitionLabel "{{ChromhmmInfTable}} color";
+	d2rq:column "{{ChromhmmInfTable}}.color";
+	.
+[/ChromhmmInfTable]
+
+[CpgBincountTable]
+# {{CpgBincountTable}}
+map:{{CpgBincountTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{CpgBincountTable}}/@@{{CpgBincountTable}}.id@@";
+	d2rq:class vocab:{{CpgBincountTable}};
+	d2rq:classDefinitionLabel "{{CpgBincountTable}}";
+	.
+map:{{CpgBincountTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap {{CpgBincountTable}};
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{CpgBincountTable}} #@@{{CpgBincountTable}}.id@@";
+	.
+map:{{CpgBincountTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_id;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} id";
+	d2rq:column "{{CpgBincountTable}}.id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{CpgBincountTable}}_bin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_bin;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} bin";
+	d2rq:column "{{CpgBincountTable}}.bin";
+	d2rq:datatype xsd:integer;
+	.
+map:{{CpgBincountTable}}_chr a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_chr;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} chr";
+	d2rq:column "{{CpgBincountTable}}.chr";
+	.
+map:{{CpgBincountTable}}_start a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_start;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} start";
+	d2rq:column "{{CpgBincountTable}}.start";
+	d2rq:datatype xsd:integer;
+	.
+map:{{CpgBincountTable}}_end a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_end;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} end";
+	d2rq:column "{{CpgBincountTable}}.end";
+	d2rq:datatype xsd:integer;
+	.
+map:{{CpgBincountTable}}_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_name;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} name";
+	d2rq:column "{{CpgBincountTable}}.name";
+	.
+map:{{CpgBincountTable}}_length a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_length;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} length";
+	d2rq:column "{{CpgBincountTable}}.length";
+	d2rq:datatype xsd:integer;
+	.
+map:{{CpgBincountTable}}_cpgNum a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:cpg_bincount_9606_ucsc_cpgNum;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} cpgNum";
+	d2rq:column "{{CpgBincountTable}}.cpgNum";
+	d2rq:datatype xsd:integer;
+	.
+map:{{CpgBincountTable}}_gcNum a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_gcNum;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} gcNum";
+	d2rq:column "{{CpgBincountTable}}.gcNum";
+	d2rq:datatype xsd:integer;
+	.
+map:{{CpgBincountTable}}_perCpg a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_perCpg;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} perCpg";
+	d2rq:column "{{CpgBincountTable}}.perCpg";
+	d2rq:datatype xsd:double;
+	.
+map:{{CpgBincountTable}}_perGc a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_perGc;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} perGc";
+	d2rq:column "{{CpgBincountTable}}.perGc";
+	d2rq:datatype xsd:double;
+	.
+map:{{CpgBincountTable}}_obsExp a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{CpgBincountTable}};
+	d2rq:property vocab:{{CpgBincountTable}}_obsExp;
+	d2rq:propertyDefinitionLabel "{{CpgBincountTable}} obsExp";
+	d2rq:column "{{CpgBincountTable}}.obsExp";
+	d2rq:datatype xsd:double;
+	.
+[/CpgBincountTable]
+
+[RefgeneTable]
+# {{RefgeneTable}}
+map:{{RefgeneTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{RefgeneTable}}";
+	d2rq:class vocab:{{RefgeneTable}};
+	d2rq:classDefinitionLabel "{{RefgeneTable}}";
+	.
+map:{{RefgeneTable}}_bin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_bin;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} bin";
+	d2rq:column "{{RefgeneTable}}.bin";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_name;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} name";
+	d2rq:column "{{RefgeneTable}}.name";
+	.
+map:{{RefgeneTable}}_chrom a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}};
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} chrom";
+	d2rq:column "{{RefgeneTable}}.chrom";
+	.
+map:{{RefgeneTable}}_strand a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_strand;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} strand";
+	d2rq:column "{{RefgeneTable}}.strand";
+	.
+map:{{RefgeneTable}}_txStart a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_txStart;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} txStart";
+	d2rq:column "{{RefgeneTable}}.txStart";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_txEnd a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_txEnd;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} txEnd";
+	d2rq:column "{{RefgeneTable}}.txEnd";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_cdsStart a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_cdsStart;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} cdsStart";
+	d2rq:column "{{RefgeneTable}}.cdsStart";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_cdsEnd a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_cdsEnd;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} cdsEnd";
+	d2rq:column "{{RefgeneTable}}.cdsEnd";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_exonCount a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_exonCount;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} exonCount";
+	d2rq:column "{{RefgeneTable}}.exonCount";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_exonStarts a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_exonStarts;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} exonStarts";
+	d2rq:column "{{RefgeneTable}}.exonStarts";
+	d2rq:datatype xsd:hexBinary;
+	.
+map:{{RefgeneTable}}_exonEnds a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_exonEnds;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} exonEnds";
+	d2rq:column "{{RefgeneTable}}.exonEnds";
+	d2rq:datatype xsd:hexBinary;
+	.
+map:{{RefgeneTable}}_score a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap {{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_score;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} score";
+	d2rq:column "{{RefgeneTable}}.score";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_name2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_name2;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} name2";
+	d2rq:column "{{RefgeneTable}}.name2";
+	.
+map:{{RefgeneTable}}_cdsStartStat a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_cdsStartStat;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} cdsStartStat";
+	d2rq:column "{{RefgeneTable}}.cdsStartStat";
+	.
+map:{{RefgeneTable}}_cdsEndStat a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_cdsEndStat;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} cdsEndStat";
+	d2rq:column "{{RefgeneTable}}.cdsEndStat";
+	.
+map:{{RefgeneTable}}_exonFrames a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_exonFrames;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} exonFrames";
+	d2rq:column "{{RefgeneTable}}.exonFrames";
+	d2rq:datatype xsd:hexBinary;
+	.
+map:{{RefgeneTable}}_refgene_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_refgene_id;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} refgene_id";
+	d2rq:column "{{RefgeneTable}}.refgene_id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RefgeneTable}}_step a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RefgeneTable}};
+	d2rq:property vocab:{{RefgeneTable}}_step;
+	d2rq:propertyDefinitionLabel "{{RefgeneTable}} step";
+	d2rq:column "{{RefgeneTable}}.step";
+	d2rq:datatype xsd:integer;
+[/RefgeneTable]	.
+
+[RnaseqQtyTalbes]
+# {{RnaseqQtyTalbes}}
+map:{{RnaseqQtyTalbes}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{RnaseqQtyTalbes}}/@@{{RnaseqQtyTalbes}}.group_id@@";
+	d2rq:class vocab:{{RnaseqQtyTalbes}};
+	d2rq:classDefinitionLabel "{{RnaseqQtyTalbes}}";
+	.
+map:{{RnaseqQtyTalbes}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{RnaseqQtyTalbes}} #@@{{RnaseqQtyTalbes}}.group_id@@";
+	.
+map:{{RnaseqQtyTalbes}}_group_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
+	d2rq:property vocab:{{RnaseqQtyTalbes}}_group_id;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} group_id";
+	d2rq:column "{{RnaseqQtyTalbes}}.group_id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RnaseqQtyTalbes}}_tag a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
+	d2rq:property vocab:{{RnaseqQtyTalbes}}_tag;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} tag";
+	d2rq:column "{{RnaseqQtyTalbes}}.tag";
+	d2rq:datatype xsd:integer;
+	.
+map:{{RnaseqQtyTalbes}}_ppm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
+	d2rq:property vocab:{{RnaseqQtyTalbes}}_ppm;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} ppm";
+	d2rq:column "{{RnaseqQtyTalbes}}.ppm";
+	d2rq:datatype xsd:double;
+	.
+map:{{RnaseqQtyTalbes}}_rpkm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
+	d2rq:property vocab:{{RnaseqQtyTalbes}}_rpkm;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} rpkm";
+	d2rq:column "{{RnaseqQtyTalbes}}.rpkm";
+	d2rq:datatype xsd:double;
+	.
+[/RnaseqQtyTalbes]
+
+[TssBincountTable]
+# {{TssBincountTable}}
+map:{{TssBincountTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{TssBincountTable}}/@@{{TssBincountTable}}.id@@";
+	d2rq:class vocab:{{TssBincountTable}};
+	d2rq:classDefinitionLabel "{{TssBincountTable}}";
+	.
+map:{{TssBincountTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{TssBincountTable}} #@@{{TssBincountTable}}.id@@";
+	.
+map:{{TssBincountTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_id;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} id";
+	d2rq:column "{{TssBincountTable}}.id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{TssBincountTable}}_bin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_bin;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} bin";
+	d2rq:column "{{TssBincountTable}}.bin";
+	d2rq:datatype xsd:integer;
+	.
+map:{{TssBincountTable}}_chr a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_chr;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} chr";
+	d2rq:column "{{TssBincountTable}}.chr";
+	.
+map:{{TssBincountTable}}_pos a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_pos;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} pos";
+	d2rq:column "{{TssBincountTable}}.pos";
+	d2rq:datatype xsd:integer;
+	.
+map:{{TssBincountTable}}_strand a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_strand;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} strand";
+	d2rq:column "{{TssBincountTable}}.strand";
+	.
+map:{{TssBincountTable}}_count a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_count;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} count";
+	d2rq:column "{{TssBincountTable}}.count";
+	d2rq:datatype xsd:integer;
+	.
+map:{{TssBincountTable}}_repgrp a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_repgrp;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} repgrp";
+	d2rq:column "{{TssBincountTable}}.repgrp";
+	.
+map:{{TssBincountTable}}_repprm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_repprm;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} repprm";
+	d2rq:column "{{TssBincountTable}}.repprm";
+	.
+map:{{TssBincountTable}}_rep a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}};
+	d2rq:property vocab:{{TssBincountTable}}_rep;
+	d2rq:propertyDefinitionLabel "{{TssBincountTable}} rep";
+	d2rq:column "{{TssBincountTable}}.rep";
+	d2rq:datatype xsd:boolean;
+	.
+[/TssBincountTable]
+
+[VcfInfTable]
+# {{VcfInfTable}}
+map:{{VcfInfTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{VcfInfTable}}/@@{{VcfInfTable}}.id@@";
+	d2rq:class vocab:{{VcfInfTable}};
+	d2rq:classDefinitionLabel "{{VcfInfTable}}";
+	.
+map:{{VcfInfTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{VcfInfTable}} #@@{{VcfInfTable}}.id@@";
+	.
+map:{{VcfInfTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_id;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} id";
+	d2rq:column "{{VcfInfTable}}.id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{VcfInfTable}}_bin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_bin;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} bin";
+	d2rq:column "{{VcfInfTable}}.bin";
+	d2rq:datatype xsd:integer;
+	.
+map:{{VcfInfTable}}_chr a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_chr;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} chr";
+	d2rq:column "{{VcfInfTable}}.chr";
+	.
+map:{{VcfInfTable}}_pos a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_pos;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} pos";
+	d2rq:column "{{VcfInfTable}}.pos";
+	d2rq:datatype xsd:integer;
+	.
+map:{{VcfInfTable}}_known a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_known;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} known";
+	d2rq:column "{{VcfInfTable}}.known";
+	.
+map:{{VcfInfTable}}_bases a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_bases;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} bases";
+	d2rq:column "{{VcfInfTable}}.bases";
+	.
+map:{{VcfInfTable}}_ad a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_ad;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} ad";
+	d2rq:column "{{VcfInfTable}}.ad";
+	.
+map:{{VcfInfTable}}_gt a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_gt;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} gt";
+	d2rq:column "{{VcfInfTable}}.gt";
+	.
+map:{{VcfInfTable}}_gq a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_gq;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} gq";
+	d2rq:column "{{VcfInfTable}}.gq";
+	.
+map:{{VcfInfTable}}_af a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_af;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} af";
+	d2rq:column "{{VcfInfTable}}.af";
+	.
+map:{{VcfInfTable}}_info a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_info;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} info";
+	d2rq:column "{{VcfInfTable}}.info";
+	.
+map:{{VcfInfTable}}_detail a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}};
+	d2rq:property vocab:{{VcfInfTable}}_detail;
+	d2rq:propertyDefinitionLabel "{{VcfInfTable}} detail";
+	d2rq:column "{{VcfInfTable}}.detail";
+	.
+[/VcfInfTable]
+
+[WRnaseqTable]
+# {{WRnaseqTable}}
+map:{{WRnaseqTable}} a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "{{WRnaseqTable}}/@@{{WRnaseqTable}}.id@@";
+	d2rq:class vocab:{{WRnaseqTable}};
+	d2rq:classDefinitionLabel "{{WRnaseqTable}}";
+	.
+map:{{WRnaseqTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property rdfs:label;
+	d2rq:pattern "{{WRnaseqTable}} #@@{{WRnaseqTable}}.id@@";
+	.
+map:{{WRnaseqTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_id;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} id";
+	d2rq:column "{{WRnaseqTable}}.id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{WRnaseqTable}}_group_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_group_id;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} group_id";
+	d2rq:column "{{WRnaseqTable}}.group_id";
+	d2rq:datatype xsd:integer;
+	.
+map:{{WRnaseqTable}}_name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_name;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} name";
+	d2rq:column "{{WRnaseqTable}}.name";
+	d2rq:datatype xsd:hexBinary;
+	.
+map:{{WRnaseqTable}}_chr a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_chr;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} chr";
+	d2rq:column "{{WRnaseqTable}}.chr";
+	.
+map:{{WRnaseqTable}}_strand a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_strand;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} strand";
+	d2rq:column "{{WRnaseqTable}}.strand";
+	.
+map:{{WRnaseqTable}}_utr_start a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_utr_start;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} utr_start";
+	d2rq:column "{{WRnaseqTable}}.utr_start";
+	d2rq:datatype xsd:integer;
+	.
+map:{{WRnaseqTable}}_utr_end a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_utr_end;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} utr_end";
+	d2rq:column "{{WRnaseqTable}}.utr_end";
+	d2rq:datatype xsd:integer;
+	.
+map:{{WRnaseqTable}}_cds_start a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_cds_start;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} cds_start";
+	d2rq:column "{{WRnaseqTable}}.cds_start";
+	d2rq:datatype xsd:integer;
+	.
+map:{{WRnaseqTable}}_cds_end a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_cds_end;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} cds_end";
+	d2rq:column "{{WRnaseqTable}}.cds_end";
+	d2rq:datatype xsd:integer;
+	.
+map:{{WRnaseqTable}}_exn_starts a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_exn_starts;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} exn_starts";
+	d2rq:column "{{WRnaseqTable}}.exn_starts";
+	d2rq:datatype xsd:hexBinary;
+	.
+map:{{WRnaseqTable}}_exn_ends a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_exn_ends;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} exn_ends";
+	d2rq:column "{{WRnaseqTable}}.exn_ends";
+	d2rq:datatype xsd:hexBinary;
+	.
+map:{{WRnaseqTable}}_symbol a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_symbol;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} symbol";
+	d2rq:column "{{WRnaseqTable}}.symbol";
+	.
+map:{{WRnaseqTable}}_step a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_step;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} step";
+	d2rq:column "{{WRnaseqTable}}.step";
+	d2rq:datatype xsd:integer;
+	.
+map:{{WRnaseqTable}}_geneid a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{WRnaseqTable}};
+	d2rq:property vocab:{{WRnaseqTable}}_geneid;
+	d2rq:propertyDefinitionLabel "{{WRnaseqTable}} geneid";
+	d2rq:column "{{WRnaseqTable}}.geneid";
+	.
+[/WRnaseqTable]

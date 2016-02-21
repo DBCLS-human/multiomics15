@@ -1,0 +1,75 @@
+@prefix rdf:              <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:             <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:              <http://www.w3.org/2002/07/owl#> .
+@prefix obo:              <http://purl.obolibrary.org/obo/> .
+@prefix dc:               <http://purl.org/dc/terms/> .
+@prefix kero:             <http://dbtss.hgc.jp/rdf/ontology/> .
+@prefix faldo:            <http://biohackathon.org/resource/faldo#> .
+@prefix dbsnp:            <http://info.identifiers.org/dbsnp/> .
+@prefix ncbisnp:          <http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=> .
+@prefix ensemblvariation: <https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#> .
+
+<http://dbtss.hgc.jp/rdf/experiment/{{Experiment}}>
+    a kero:Experiment.
+
+[vcf]
+<http://dbtss.hgc.jp/rdf/experiment/{{Experiment}}> kero:hasSNV <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}> .
+
+<http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}> a obo:SO0001483;
+    rdfs:label "variation on chr{{Chrom}}:{{Pos}} from {{Experiment}}";
+    faldo:location <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}:{{Pos}}-{{Pos}}:1>;
+    kero:additionalInfomation "{{Info}}";
+    kero:alleleFrequency {{Info|AF}};
+    kero:allelicDepths "{{Detail:AD}}";
+    kero:dbsnpID "{{Id0}}";
+    kero:dbsnpID "{{Id1}}";
+    kero:dbsnpID "{{Id2}}";
+    kero:dbsnpID "{{Id3}}";
+    kero:dbsnpID "{{Id4}}";
+    kero:dbsnpID "{{Id5}}";
+    kero:dbsnpID "{{Id6}}";
+    kero:dbsnpID "{{Id7}}";
+    kero:dbsnpID "{{Id8}}";
+    kero:dbsnpID "{{Id9}}";
+    kero:genotype "{{Detail:GT}}";
+    kero:genotypeData "{{Format}}|{{Detail}}";
+    kero:genotypeQuality {{Detail:GQ}};
+    kero:quality {{Qual}};
+    dc:identifier "{{Chrom}}:{{Pos}}";
+    rdfs:seeAlso dbsnp:{{Id0}}, ncbisnp:{{Id0}};
+    rdfs:seeAlso dbsnp:{{Id1}}, ncbisnp:{{Id1}};
+    rdfs:seeAlso dbsnp:{{Id2}}, ncbisnp:{{Id2}};
+    rdfs:seeAlso dbsnp:{{Id3}}, ncbisnp:{{Id3}};
+    rdfs:seeAlso dbsnp:{{Id4}}, ncbisnp:{{Id4}};
+    rdfs:seeAlso dbsnp:{{Id5}}, ncbisnp:{{Id5}};
+    rdfs:seeAlso dbsnp:{{Id6}}, ncbisnp:{{Id6}};
+    rdfs:seeAlso dbsnp:{{Id7}}, ncbisnp:{{Id7}};
+    rdfs:seeAlso dbsnp:{{Id8}}, ncbisnp:{{Id8}};
+    rdfs:seeAlso dbsnp:{{Id9}}, ncbisnp:{{Id9}};
+    ensemblvariation:hasAllele <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Ref}}>,
+        <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Alt}}> .
+
+<http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Ref}}>
+    a ensemblvariation:referenceAllele, ensemblvariation:ancestral_allele;
+    rdfs:label "{{Experiment}} chr{{Chrom}}:{{Pos}} allele {{Ref}}";
+    dc:identifier "{{Chrom}}:{{Pos}}#{{Ref}}" .
+
+<http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Alt}}>
+    a ensemblvariation:derivedAllele;
+    rdfs:label "{{Experiment}} chr{{Chrom}}:{{Pos}} allele {{Alt}}";
+    dc:identifier "{{Chrom}}:{{Pos}}#{{Alt}}" .
+
+<http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}:{{Pos}}-{{Pos}}:1>
+    a faldo:Region;
+    rdfs:label "GRCh38 chr{{Chrom}}:{{Pos}}-{{Pos}} Forward";
+    faldo:begin <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}:{{Pos}}:1>;
+    faldo:end <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}:{{Pos}}:1>;
+    faldo:reference <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}>;
+    dc:identifier "chromosome:GRCh38:{{Chrom}}:{{Pos}}-{{Pos}}:1" .
+
+<http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}:{{Pos}}:1>
+    a faldo:ExactPosition, faldo:ForwardStrandPosition;
+    rdfs:label "RCh38 chr{{Chrom}}:{{Pos}} Forward";
+    faldo:position {{Pos}};
+    faldo:reference <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}>;
+    dc:identifier "chromosome:GRCh38:{{Chrom}}:{{Pos}}:1" .
