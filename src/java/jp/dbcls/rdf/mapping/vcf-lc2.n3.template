@@ -34,14 +34,14 @@ map:tse000086 a d2rq:ClassMap;
 [VcfInfTable]
 map:{{VcfInfTable}} a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:tse000086;
-	d2rq:property kero:hasSNV;
+	d2rq:property kero:has_SNV;
 	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos)";
 	.
 
 map:{{VcfInfTable}}_class a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
 	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos)";
-	d2rq:class obo:SO0001483;
+	d2rq:class obo:SO_0001483;
 	.
 map:{{VcfInfTable}}_label a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
@@ -109,12 +109,12 @@ map:{{VcfInfTable}}_ncbisnp a d2rq:PropertyBridge;
 [VcfInfTable]
 map:{{VcfInfTable}}_allele_ref a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
-	d2rq:property ensemblvariation:hasAllele;
+	d2rq:property ensemblvariation:has_allele;
 	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 1, 1))";
 	.
 map:{{VcfInfTable}}_allele_alt a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
-	d2rq:property ensemblvariation:hasAllele;
+	d2rq:property ensemblvariation:has_allele;
 	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 3, 1))";
 	.
 map:{{VcfInfTable}}_allele_ref_class a d2rq:ClassMap;

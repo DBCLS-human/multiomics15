@@ -26,11 +26,11 @@ source      select count(*) from vcf_inf_9606_chr1_lc2ad
 
 [VcfInfTable]
 mappingId   {{VcfInfTable}}
-target      <http://dbtss.hgc.jp/rdf/experiment/TSE000086> kero:hasSNV <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> .
+target      <http://dbtss.hgc.jp/rdf/experiment/TSE000086> kero:has_SNV <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> .
 source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
 
 mappingId   {{VcfInfTable}}_class
-target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> a obo:SO0001483 .
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> a obo:SO_0001483 .
 source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
 
 mappingId   {{VcfInfTable}}_label
@@ -76,11 +76,11 @@ source      select substring( chr, 4 ) as chrom, pos, known from {{VcfInfTable}}
 
 [VcfInfTable]
 mappingId   {{VcfInfTable}}_allele_ref
-target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> ensemblvariation:hasAllele <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{ref}> .
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> ensemblvariation:has_allele <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{ref}> .
 source      select substring( chr, 4 ) as chrom, pos, substring( bases, 1, 1 ) as ref from {{VcfInfTable}}
 
 mappingId   {{VcfInfTable}}_allele_alt
-target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> ensemblvariation:hasAllele <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{alt}> .
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> ensemblvariation:has_allele <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{alt}> .
 source      select substring( chr, 4 ) as chrom, pos, substring( bases, 3, 1 ) as alt from {{VcfInfTable}}
 
 mappingId   {{VcfInfTable}}_allele_ref_class_ref

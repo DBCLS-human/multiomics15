@@ -26,7 +26,7 @@
         xmlns:ncbisnp="http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs="
         xmlns:ensemblvariation="https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#" >
     <owl:Ontology rdf:about="http://dbtss.hgc.jp/rdf/ontology"/>
-    <owl:DatatypeProperty rdf:about="kero:hasSNV"/>
+    <owl:DatatypeProperty rdf:about="kero:has_SNV"/>
     <owl:DatatypeProperty rdf:about="rdfs:label"/>
     <owl:DatatypeProperty rdf:about="kero:additionalInformation"/>
     <owl:DatatypeProperty rdf:about="kero:alleleFrequency"/>
@@ -37,14 +37,14 @@
     <owl:DatatypeProperty rdf:about="kero:quality"/>
     <owl:DatatypeProperty rdf:about="dc:identifier"/>
     <owl:DatatypeProperty rdf:about="rdfs:seeAlso"/>
-    <owl:DatatypeProperty rdf:about="ensemblvariation:hasAllele"/>
+    <owl:DatatypeProperty rdf:about="ensemblvariation:has_allele"/>
     <owl:DatatypeProperty rdf:about="faldo:location"/>
     <owl:DatatypeProperty rdf:about="faldo:begin"/>
     <owl:DatatypeProperty rdf:about="faldo:end"/>
     <owl:DatatypeProperty rdf:about="faldo:position"/>
     <owl:DatatypeProperty rdf:about="faldo:reference"/>
     <owl:Class rdf:about="kero:Experiment"/>
-    <owl:Class rdf:about="obo:SO0001483"/>
+    <owl:Class rdf:about="obo:SO_0001483"/>
     <owl:Class rdf:about="ensemblvariation:referenceAllele"/>
     <owl:Class rdf:about="ensemblvariation:ancestralAllele"/>
     <owl:Class rdf:about="ensemblvariation:derivedAllele"/>

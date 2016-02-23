@@ -13,9 +13,9 @@
     a kero:Experiment.
 
 [vcf]
-<http://dbtss.hgc.jp/rdf/experiment/{{Experiment}}> kero:hasSNV <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}> .
+<http://dbtss.hgc.jp/rdf/experiment/{{Experiment}}> kero:has_SNV <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}> .
 
-<http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}> a obo:SO0001483;
+<http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}> a obo:SO_0001483;
     rdfs:label "variation on chr{{Chrom}}:{{Pos}} from {{Experiment}}";
     faldo:location <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{{Chrom}}:{{Pos}}-{{Pos}}:1>;
     kero:additionalInfomation "{{Info}}";
@@ -46,7 +46,7 @@
     rdfs:seeAlso dbsnp:{{Id7}}, ncbisnp:{{Id7}};
     rdfs:seeAlso dbsnp:{{Id8}}, ncbisnp:{{Id8}};
     rdfs:seeAlso dbsnp:{{Id9}}, ncbisnp:{{Id9}};
-    ensemblvariation:hasAllele <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Ref}}>,
+    ensemblvariation:has_allele <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Ref}}>,
         <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Alt}}> .
 
 <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Ref}}>
