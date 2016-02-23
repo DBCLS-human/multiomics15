@@ -9,7 +9,7 @@
     <script src="sparql.js"></script>
     <script>
       function call_sparql() {
-      	var endpoint = 'http://humanrdf.dbcls.jp/virtuoso/sparql';
+      	var endpoint = 'http://humanrdf.dbcls.jp/sparql';
   	    dbclsSparql.setEndpoint( endpoint );
 
     	var objects = dbclsSparql.executeQuery( $( '#sparql' ).val(), endpoint );

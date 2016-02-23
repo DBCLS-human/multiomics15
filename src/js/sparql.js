@@ -14,7 +14,7 @@
 var dbclsSparql = {};
 
 // default endpoint
-dbclsSparql.endpoint = 'http://humanrdf.dbcls.jp/virtuoso/sparql';
+dbclsSparql.endpoint = 'http://humanrdf.dbcls.jp/sparql';
 
 // temporary query result
 dbclsSparql.queryResult = null;

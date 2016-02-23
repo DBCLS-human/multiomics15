@@ -40,7 +40,7 @@ dbclsFaldo.getRegion = function( region ) {
 	           + '    filter( ?begin_type in( faldo:ForwardStrandPosition, faldo:ReverseStrandPosition) ).'
 	           + '    filter( !isBlank( ?reg ) ).'
 	           + '    filter ( replace( str( ?reg ), ".*/", "" ) = "' + region + '" ).'
-	           + '} order by ?name';
+	           + '} limit 1';
 	sparql = dbclsFaldo.getPrefix() + sparql;
 
 	// execute
