@@ -14,6 +14,7 @@ package jp.dbcls.rdf.vcf;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -47,6 +48,7 @@ public class Vcf2Rdf {
 		String sample = CommandLineTool.getOption( "sample", args );
 		String inFile = CommandLineTool.getOption( "in", args );
 		String outFile = CommandLineTool.getOption( "out", args );
+		String template = CommandLineTool.getOption( "template", args );
 
 		if( sample == null || inFile == null ) {
 			showUsage();
@@ -61,7 +63,7 @@ public class Vcf2Rdf {
 		}
 
 		Vcf2Rdf vcf2rdf = new Vcf2Rdf();
-		vcf2rdf.convert( in, out, sample );
+		vcf2rdf.convert( in, out, sample, template );
 
 		out.flush();
 		out.close();
@@ -77,7 +79,7 @@ public class Vcf2Rdf {
 	 * shows usage
 	 */
 	static void showUsage() {
-		String line = "java jp.trans_it.rdf.Vcf2Rdf -sample [sample name] ( -in [vcf file] ) -out [output file]";
+		String line = "java jp.trans_it.rdf.Vcf2Rdf -sample [sample ID] -in [vcf file] -out [output file] -template [template file]";
 		System.out.println( line );
 	}
 
@@ -86,11 +88,19 @@ public class Vcf2Rdf {
 	 * @param in input file
 	 * @param out output file
 	 * @param sample sample name
+	 * @param template template file
 	 * @throws IOException
 	 */
-	void convert( BufferedReader in, PrintStream out, String sample ) throws IOException {
+	void convert( BufferedReader in, PrintStream out, String sample, String template ) throws IOException {
 		// template
-		InputStream templateStream = getClass().getClassLoader().getResourceAsStream( m_templatePath );
+		InputStream templateStream = null;
+		if( template == null ) {
+			templateStream = getClass().getClassLoader().getResourceAsStream( m_templatePath );
+		}
+		else {
+			templateStream = new FileInputStream( template );
+		}
+
 		BufferedReader reader = new BufferedReader( new InputStreamReader( templateStream ) );
 
 		boolean inVcf = false;

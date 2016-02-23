@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>SPARQL Test</title>
+    <meta charset="utf-8">
+	<link rel="stylesheet" href="sparql.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript" ></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="sparql.js"></script>
+    <script>
+      function call_sparql() {
+      	var endpoint = 'http://humanrdf.dbcls.jp/virtuoso/sparql';
+  	    dbclsSparql.setEndpoint( endpoint );
+
+    	var objects = dbclsSparql.executeQuery( $( '#sparql' ).val(), endpoint );
+    	dbclsSparql.addTableFromObjects( $( '#box' ), 'dbcls', objects );
+      }
+
+      $(document).ready(
+          function() {
+              $( '#send' ).click( call_sparql );
+          }
+      );
+	</script>
+  </head>
+  <body>
+        <textarea name="sparql" id='sparql' rows="20"
+            cols="60">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/TR/rdf-schema/#&gt;
+PREFIX dct: &lt;http://purl.org/dc/terms/&gt;
+PREFIX faldo: &lt;http://biohackathon.org/resource/faldo#&gt;
+PREFIX obo: &lt;http://purl.obolibrary.org/obo/&gt;
+PREFIX kero: &lt;http://dbtss.hgc.jp/ontology/kero.owl#&gt;
+PREFIX chr: &lt;http://dbtss.hgc.jp/rdf/chromosome/9606/GRCh38#&gt;
+PREFIX file: &lt;http://dbtss.hgc.jp/rdf/BSseqFile/&gt;
+PREFIX bs: &lt;http://dbtss.hgc.jp/rdf/BSseq/&gt;
+
+select distinct replace( str( ?reg ), ".*/", "" ) as ?name ?label replace( str( ?ref ), ".*#", "" ) as ?chromosome if( ?begin_type = faldo:ReverseStrandPosition, 'reverse', 'forward' ) as ?type ?begin ?end where {
+    ?reg ?p ?location;
+        rdfs:label ?label.
+    ?location a faldo:Region;
+        faldo:begin ?begin_pos;
+        faldo:end ?end_pos.
+    ?begin_pos a ?begin_type;
+        faldo:reference ?ref;
+        faldo:position ?begin.
+    ?end_pos a ?end_type;
+        faldo:position ?end.
+    filter( ?begin_type = ?end_type ).
+    filter( ?begin_type in( faldo:ForwardStrandPosition, faldo:ReverseStrandPosition) ).
+    filter( !isBlank( ?reg ) ).
+} order by ?name limit 100</textarea>
+        <br>
+        <button id='send'>送信</button>
+    <div id="box" style="margin:100px 0px;"></div>
+  </body>
+</html>
