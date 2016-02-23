@@ -57,7 +57,7 @@ map:{{VcfInfTable}}_af a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
 	d2rq:property kero:alleleFrequency;
 	d2rq:column "{{VcfInfTable}}.af";
-	2rq:datatype xsd:double;
+	d2rq:datatype xsd:double;
 	.
 map:{{VcfInfTable}}_ad a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
