@@ -115,6 +115,7 @@ public class Vcf2Rdf {
 				inVcf = true;
 			}
 			else {
+				line = line.replaceAll( "\\{\\{Experiment\\}\\}", sample );
 				out.println( line );
 			}
 		}

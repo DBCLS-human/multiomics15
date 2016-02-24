@@ -50,12 +50,12 @@
         <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Alt}}> .
 
 <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Ref}}>
-    a ensemblvariation:referenceAllele, ensemblvariation:ancestral_allele;
+    a ensemblvariation:reference_allele, ensemblvariation:ancestral_allele;
     rdfs:label "{{Experiment}} chr{{Chrom}}:{{Pos}} allele {{Ref}}";
     dc:identifier "{{Chrom}}:{{Pos}}#{{Ref}}" .
 
 <http://dbtss.hgc.jp/rdf/data/{{Experiment}}/{{Chrom}}:{{Pos}}#{{Alt}}>
-    a ensemblvariation:derivedAllele;
+    a ensemblvariation:derived_allele;
     rdfs:label "{{Experiment}} chr{{Chrom}}:{{Pos}} allele {{Alt}}";
     dc:identifier "{{Chrom}}:{{Pos}}#{{Alt}}" .
 

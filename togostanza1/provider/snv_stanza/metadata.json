@@ -1,0 +1,41 @@
+{
+  "id": "snv",
+  "label": "Snv",
+  "definition": "Displaying the list of alleles of the specified range.",
+  "parameter": [
+    {
+      "key": "sample",
+      "example": "LC2/ad",
+      "description": "Example name or ID",
+      "required": true
+    },
+    {
+      "key": "chromosome",
+      "example": "1",
+      "description": "Chromosome Number",
+      "required": true
+    },
+    {
+      "key": "range_start",
+      "example": "10000",
+      "description": "The start of the range",
+      "required": true
+    },
+    {
+      "key": "range_end",
+      "example": "11000",
+      "description": "The end of the range",
+      "required": true
+    }                  
+  ],
+  "type": "Stanza",
+  "context": "",
+  "display": "",
+  "provider": "DBCLS",
+  "license": "",
+  "author": "DBCLS, S.Tanaka",
+  "address": "",
+  "contributor": [],
+  "created": "2016-02-15",
+  "updated": "2016-02-15"
+}

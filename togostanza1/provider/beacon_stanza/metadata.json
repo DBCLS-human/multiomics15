@@ -1,0 +1,41 @@
+{
+  "id": "beacon",
+  "label": "Beacon",
+  "definition": "Judging if the specified allele is existing.",
+    "parameter": [
+    {
+      "key": "sample",
+      "example": "LC2/ad",
+      "description": "Example name or ID",
+      "required": true
+    },
+    {
+      "key": "chromosome",
+      "example": "1",
+      "description": "Chromosome Number",
+      "required": true
+    },
+    {
+      "key": "position",
+      "example": "10234",
+      "description": "Allele position",
+      "required": true
+    },
+    {
+      "key": "allele",
+      "example": "T",
+      "description": "Allele",
+      "required": true
+    }
+  ],
+  "type": "Stanza",
+  "context": "",
+  "display": "",
+  "provider": "DBCLS",
+  "license": "",
+  "author": "DBCLS, S.Tanaka",
+  "address": "",
+  "contributor": [],
+  "created": "2016-02-24",
+  "updated": "2016-02-24"
+}

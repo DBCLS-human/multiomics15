@@ -120,12 +120,12 @@ map:{{VcfInfTable}}_allele_alt a d2rq:PropertyBridge;
 map:{{VcfInfTable}}_allele_ref_class a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
 	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 1, 1))";
-	d2rq:class ensemblvariation:referenceAllele, ensemblvariation:ancestralAllele;
+	d2rq:class ensemblvariation:reference_allele, ensemblvariation:ancestral_allele;
 	.
 map:{{VcfInfTable}}_allele_alt_class a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
 	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 3, 1))";
-	d2rq:class ensemblvariation:derivedAllele;
+	d2rq:class ensemblvariation:derived_allele;
 	.
 map:{{VcfInfTable}}_allele_ref_label a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:{{VcfInfTable}}_allele_ref_class;

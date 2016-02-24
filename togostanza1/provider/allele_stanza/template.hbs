@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Allele Result - TogoStanza Tools</title>
+    {{#each css_uri}}
+    <link rel="stylesheet" href="{{this}}" />
+    {{/each}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+    {{adjust_iframe_height_script}}
+  </head>
+
+  <body>
+    <h1>Allele - TogoStanza Tools</h1>
+    <div style="border-bottom: solid 1px #000000">
+      Search: {{search}}
+    <div>
+    <table style="margin: 10px 5px;" border="1">
+      <tr>
+	<th>Reference Allele</th>
+	<th>Alternative Allele</th>
+      </tr>
+      {{#each alleles}}
+        <tr>
+	  <td>{{reference}}</td>
+	  <td>{{alternative}}</td>
+	</tr>
+      {{/each}}
+    </table>	
+  </body>
+</html>

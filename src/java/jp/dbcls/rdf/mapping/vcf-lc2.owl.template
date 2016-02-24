@@ -45,9 +45,9 @@
     <owl:DatatypeProperty rdf:about="faldo:reference"/>
     <owl:Class rdf:about="kero:Experiment"/>
     <owl:Class rdf:about="obo:SO_0001483"/>
-    <owl:Class rdf:about="ensemblvariation:referenceAllele"/>
-    <owl:Class rdf:about="ensemblvariation:ancestralAllele"/>
-    <owl:Class rdf:about="ensemblvariation:derivedAllele"/>
+    <owl:Class rdf:about="ensemblvariation:reference_allele"/>
+    <owl:Class rdf:about="ensemblvariation:ancestral_allele"/>
+    <owl:Class rdf:about="ensemblvariation:derived_allele"/>
     <owl:Class rdf:about="faldo:Region"/>
     <owl:Class rdf:about="faldo:ExactPosition"/>
     <owl:Class rdf:about="faldo:ForwardStrandPosition"/>

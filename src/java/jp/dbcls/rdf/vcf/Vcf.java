@@ -109,7 +109,7 @@ public class Vcf {
 			String detail
 	) {
 		m_experiment = experiment;
-		m_chrom = chrom.replace( ".fa", "" ).replace( "c", "" );
+		m_chrom = chrom.replace( ".fa",  "" ).replace( "chr",  "" ).replace( "c", "" );
 		m_pos = pos;
 		m_ref = ref;
 		m_alt = alt;
