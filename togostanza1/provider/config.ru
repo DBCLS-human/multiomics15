@@ -16,10 +16,10 @@ map '/' do
   run proc { [302, {'Location' => '/stanza'}, []] }
 end
 
-map '/stanza/assets' do
+map '/stanza1/assets' do
   run TogoStanza.sprockets
 end
 
-map '/stanza' do
+map '/stanza1' do
   run TogoStanza::Application
 end
