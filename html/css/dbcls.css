@@ -1,21 +1,75 @@
-.dbcls_table {
+header {
+    border-bottom: 3px solid #0000ff;
+}
+
+footer {
+	border-top: 1px solid #000000;
+	font-style: italic;
+	text-align: center;
+}
+
+.buttongroup {
+	width: 300px;
+	margin: 0 auto;
+}
+
+h1 {
+    font-size: big;
+}
+
+.button {
+	display: block;
+	margin: 10px;
+	padding: 5px;
+	background-color: #000088;
+	color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 125%;
+}
+
+section {
+	padding: 5px 5px 15px;
+	border-bottom: dotted 1px #000088;
+}
+
+
+.header {
+    font-size: 125%;
+    color: #000088;
+    text-decoration: none;
+}
+
+.button:active {
+	background-clor: #ff0000;
+}
+
+.button:hover {
+	background-color: #0000ff;
+}
+
+pre {
+	width: 75%;
+	margin: 0 auto;
+	background-color: #cccccc;
+	overflow: auto;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+table {
 	border: solid 1px #000000;
 }
 
-.dbcls_cell {
+td {
 	border: solid 1px #000000;
+	padding: 2px;
 }
 
-.dbcls_header_cell {
+th {
+	border: solid 1px #000000;
+	fornt-weight: bold;
 	background-color: #000000;
 	color: #ffffff;
-	font-weight: bold;
-}
-
-.dbcls_content_odd_row {
-	background-color: #e0e0e0;
-}
-
-.dbcls_content_even_row {
-	background-color: #ffffff;
+	padding: 2px;
 }
