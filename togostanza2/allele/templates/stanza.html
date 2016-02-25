@@ -1,0 +1,16 @@
+<div style="padding-bottom: 3px; border-bottom: solid 1px #000000;">
+  {{search}}
+</div>
+<p>{{existing}}</p>
+<table style="margin: 10px 5px;" border="1">
+  <tr>
+    <th>Reference Allele</th>
+    <th>Alternative Allele</th>
+  </tr>
+  {{#each alleles}}
+  <tr>
+    <td>{{reference.value}}</td>
+    <td>{{alternative.value}}</td>
+  </tr>
+  {{/each}}
+</table>

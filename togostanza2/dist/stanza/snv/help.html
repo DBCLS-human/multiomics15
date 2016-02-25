@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="../assets/components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../snv/">
+    <link rel="stylesheet" href="../assets/css/ts.css">
+    <title>SNV</title>
+  </head>
+
+  <body>
+    <div id="contents">
+      <h1 class="page_ttl">SNV</h1>
+
+      <ul class="showcase_icn">
+        
+      </ul>
+
+      <p class="lead">Displaying alleles in the specified range.</p>
+
+      <div class="showcase_detail">
+        <ul class="showcase_id">
+          
+            <li>
+              <dl>
+                <dt>sample</dt>
+
+                <dd>
+                  <p class="id_box">
+                    TSE000086, LC2/ad
+
+                    
+                      <span class="required">required</span>
+                    
+                  </p>
+
+                  <p class="eg">
+                    Example name or ID
+                  </p>
+                </dd>
+              </dl>
+            </li>
+          
+            <li>
+              <dl>
+                <dt>chromosome</dt>
+
+                <dd>
+                  <p class="id_box">
+                    1
+
+                    
+                      <span class="required">required</span>
+                    
+                  </p>
+
+                  <p class="eg">
+                    Chromosome number
+                  </p>
+                </dd>
+              </dl>
+            </li>
+          
+            <li>
+              <dl>
+                <dt>range_start</dt>
+
+                <dd>
+                  <p class="id_box">
+                    10000
+
+                    
+                      <span class="required">required</span>
+                    
+                  </p>
+
+                  <p class="eg">
+                    The start of the range
+                  </p>
+                </dd>
+              </dl>
+            </li>
+          
+            <li>
+              <dl>
+                <dt>range_end</dt>
+
+                <dd>
+                  <p class="id_box">
+                    11000
+
+                    
+                      <span class="required">required</span>
+                    
+                  </p>
+
+                  <p class="eg">
+                    The end of the range
+                  </p>
+                </dd>
+              </dl>
+            </li>
+          
+        </ul>
+
+        <div class="showcase_code">
+          <code>&lt;togostanza-snv sample=&#34;LC2/ad&#34; chromosome=&#34;1&#34; range_start=&#34;10000&#34; range_end=&#34;11000&#34;&gt;&lt;/togostanza-snv&gt;</code>
+        </div>
+
+        <div class="showcase_box">
+          <togostanza-snv sample="LC2/ad" chromosome="1" range_start="10000" range_end="11000"></togostanza-snv>
+        </div>
+
+        <p class="explain">
+          The above element will automatically embed the following Stanza in your HTML page.
+        </p>
+      </div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "@context": {
+    "stanza": "http://togostanza.org/resource/stanza#"
+  },
+  "@id": "allele",
+  "stanza:label": "Allele",
+  "stanza:definition": "Displaying alleles of the specified position.",
+  "stanza:parameter": [
+      {
+	  "stanza:key": "sample",
+	  "stanza:example": "TSE000086, LC2/ad",
+	  "stanza:description": "Example name or ID",
+	  "stanza:required": true
+      },
+      {
+	  "stanza:key": "chromosome",
+	  "stanza:example": "1",
+	  "stanza:description": "Chromosome number",
+	  "stanza:required": true
+      },
+      {
+	  "stanza:key": "position",
+	  "stanza:example": "10234",
+	  "stanza:description": "Allele position",
+	  "stanza:required": true
+      }            
+  ],
+  "stanza:usage": "<togostanza-allele sample=\"LC2/ad\" chromosome=\"1\" position=\"10234\"></togostanza-allele>",
+  "stanza:type": "Stanza",
+  "stanza:context": "",
+  "stanza:display": "",
+  "stanza:provider": "DBCLS",
+  "stanza:license": "",
+  "stanza:author": "DBCLS, S.Tanaka",
+  "stanza:address": "",
+  "stanza:contributor": [
+  ],
+  "stanza:created": "2016-02-22",
+  "stanza:updated": "2016-02-22"
+}
