@@ -13,10 +13,6 @@ footer {
 	margin: 0 auto;
 }
 
-h1 {
-    font-size: big;
-}
-
 .button {
 	display: block;
 	margin: 10px;
@@ -72,4 +68,11 @@ th {
 	background-color: #000000;
 	color: #ffffff;
 	padding: 2px;
+}
+
+.capture {
+    display: block;
+    margin: 0 auto;
+    border: solid 1px #888888;
+    padding: 10px;
 }
