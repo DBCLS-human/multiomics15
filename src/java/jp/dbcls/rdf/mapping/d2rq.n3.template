@@ -423,48 +423,48 @@ map:{{RefgeneTable}}_step a d2rq:PropertyBridge;
 	d2rq:datatype xsd:integer;
 [/RefgeneTable]	.
 
-[RnaseqQtyTalbes]
-# {{RnaseqQtyTalbes}}
-map:{{RnaseqQtyTalbes}} a d2rq:ClassMap;
+[RnaseqQtyTable]
+# {{RnaseqQtyTable}}
+map:{{RnaseqQtyTable}} a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "{{RnaseqQtyTalbes}}/@@{{RnaseqQtyTalbes}}.group_id@@";
-	d2rq:class vocab:{{RnaseqQtyTalbes}};
-	d2rq:classDefinitionLabel "{{RnaseqQtyTalbes}}";
+	d2rq:uriPattern "{{RnaseqQtyTable}}/@@{{RnaseqQtyTable}}.group_id@@";
+	d2rq:class vocab:{{RnaseqQtyTable}};
+	d2rq:classDefinitionLabel "{{RnaseqQtyTable}}";
 	.
-map:{{RnaseqQtyTalbes}}_label a d2rq:PropertyBridge;
-	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
+map:{{RnaseqQtyTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTable}};
 	d2rq:property rdfs:label;
-	d2rq:pattern "{{RnaseqQtyTalbes}} #@@{{RnaseqQtyTalbes}}.group_id@@";
+	d2rq:pattern "{{RnaseqQtyTable}} #@@{{RnaseqQtyTable}}.group_id@@";
 	.
-map:{{RnaseqQtyTalbes}}_group_id a d2rq:PropertyBridge;
-	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
-	d2rq:property vocab:{{RnaseqQtyTalbes}}_group_id;
-	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} group_id";
-	d2rq:column "{{RnaseqQtyTalbes}}.group_id";
+map:{{RnaseqQtyTable}}_group_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTable}};
+	d2rq:property vocab:{{RnaseqQtyTable}}_group_id;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTable}} group_id";
+	d2rq:column "{{RnaseqQtyTable}}.group_id";
 	d2rq:datatype xsd:integer;
 	.
-map:{{RnaseqQtyTalbes}}_tag a d2rq:PropertyBridge;
-	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
-	d2rq:property vocab:{{RnaseqQtyTalbes}}_tag;
-	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} tag";
-	d2rq:column "{{RnaseqQtyTalbes}}.tag";
+map:{{RnaseqQtyTable}}_tag a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTable}};
+	d2rq:property vocab:{{RnaseqQtyTable}}_tag;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTable}} tag";
+	d2rq:column "{{RnaseqQtyTable}}.tag";
 	d2rq:datatype xsd:integer;
 	.
-map:{{RnaseqQtyTalbes}}_ppm a d2rq:PropertyBridge;
-	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
-	d2rq:property vocab:{{RnaseqQtyTalbes}}_ppm;
-	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} ppm";
-	d2rq:column "{{RnaseqQtyTalbes}}.ppm";
+map:{{RnaseqQtyTable}}_ppm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTable}};
+	d2rq:property vocab:{{RnaseqQtyTable}}_ppm;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTable}} ppm";
+	d2rq:column "{{RnaseqQtyTable}}.ppm";
 	d2rq:datatype xsd:double;
 	.
-map:{{RnaseqQtyTalbes}}_rpkm a d2rq:PropertyBridge;
-	d2rq:belongsToClassMap map:{{RnaseqQtyTalbes}};
-	d2rq:property vocab:{{RnaseqQtyTalbes}}_rpkm;
-	d2rq:propertyDefinitionLabel "{{RnaseqQtyTalbes}} rpkm";
-	d2rq:column "{{RnaseqQtyTalbes}}.rpkm";
+map:{{RnaseqQtyTable}}_rpkm a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{RnaseqQtyTable}};
+	d2rq:property vocab:{{RnaseqQtyTable}}_rpkm;
+	d2rq:propertyDefinitionLabel "{{RnaseqQtyTable}} rpkm";
+	d2rq:column "{{RnaseqQtyTable}}.rpkm";
 	d2rq:datatype xsd:double;
 	.
-[/RnaseqQtyTalbes]
+[/RnaseqQtyTable]
 
 [TssBincountTable]
 # {{TssBincountTable}}
