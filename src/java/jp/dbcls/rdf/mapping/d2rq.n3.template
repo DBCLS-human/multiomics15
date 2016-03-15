@@ -47,8 +47,8 @@ map:{{BSDataTable}}_id a d2rq:PropertyBridge;
 map:{{BSDataTable}}_bin a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:{{BSDataTable}};
 	d2rq:property vocab:{{BSDataTable}}_bin;
-	d2rq:propertyDefinitionLabel "bs_data_9606_LC2ad bin";
-	d2rq:column "bs_data_9606_LC2ad.bin";
+	d2rq:propertyDefinitionLabel "{{BSDataTable}} bin";
+	d2rq:column "{{BSDataTable}}.bin";
 	d2rq:datatype xsd:integer;
 	.
 map:{{BSDataTable}}_chr a d2rq:PropertyBridge;
