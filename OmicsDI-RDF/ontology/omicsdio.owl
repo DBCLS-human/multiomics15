@@ -1,0 +1,572 @@
+@prefix : <https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sio: <http://semanticscience.org/resource/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#> .
+
+<https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#> rdf:type owl:Ontology ;
+                                                                              
+                                                                              rdfs:label "Omics Directory Index (OmicsDI) RDF ontology" ;
+                                                                              
+                                                                              owl:versionInfo 0.01 ;
+                                                                              
+                                                                              dc:creator "Shin Kawano" ;
+                                                                              
+                                                                              dc:description "Omics Directory Index (OmicsDI) RDF ontology" ;
+                                                                              
+                                                                              dct:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+                                                                              
+                                                                              owl:imports <http://semanticscience.org/ontology/sio/v1.30.0/sio-release.owl> ,
+                                                                                          foaf: .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#cross_reference
+
+:cross_reference rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:label "Cross Reference" ;
+                 
+                 rdfs:comment "Cross reference is part of the entry and contains all the references to other other resources and information." ;
+                 
+                 rdfs:domain sio:SIO_000756 ;
+                 
+                 rdfs:range :Ref .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#dataset_file
+
+:dataset_file rdf:type owl:ObjectProperty ;
+              
+              rdfs:label "Dataset File" ;
+              
+              rdfs:comment "This a direct link to the data files realted with the dataset, that can be download and use by third-party tools" ;
+              
+              rdfs:range sio:SIO_000396 ;
+              
+              rdfs:domain sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#full_dataset_link
+
+:full_dataset_link rdf:type owl:ObjectProperty ;
+                   
+                   rdfs:label "Full Dataset Link" ;
+                   
+                   rdfs:comment "The original link of the dataset in the provider, it should be a universal URL that can be to find the original data" ;
+                   
+                   rdfs:range sio:SIO_000089 ;
+                   
+                   rdfs:domain sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#omics_type
+
+:omics_type rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "Omics Type" ;
+            
+            rdfs:comment "Omics_Type is a category for the type of omics dataset, it is controlled by OmicsDI infrastructure" ;
+            
+            rdfs:domain sio:SIO_000756 ;
+            
+            rdfs:range :OmicsType .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#repository
+
+:repository rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "Repository" ;
+            
+            rdfs:comment "the name of the repository should be provided at the dataset level because some providers can act as agregators distributing datasets from different databases. Then the original repository should be provided." ;
+            
+            rdfs:range sio:SIO_000750 ;
+            
+            rdfs:domain sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#submitter
+
+:submitter rdf:type owl:ObjectProperty ;
+           
+           rdfs:label "Submitter" ;
+           
+           rdfs:comment "Submitter name, Can be the full name of the person Who provided or submitted the data into the original repository. Submitter contact email is important to have a direct contact with the person Who submit the data. Submitter affiliation, Institution, Department, etc." ;
+           
+           rdfs:domain sio:SIO_000756 ;
+           
+           rdfs:range foaf:Person .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#affiliation
+
+:affiliation rdf:type owl:DatatypeProperty ;
+             
+             rdfs:label "Affiliation" ;
+             
+             rdfs:comment "Submitter affiliation, Institution, Department, etc." ;
+             
+             rdfs:domain foaf:Person .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#cell_type
+
+:cell_type rdf:type owl:DatatypeProperty ;
+           
+           rdfs:label "Cell Type" ;
+           
+           rdfs:comment "The cell type annotations for the samples under study" ;
+           
+           rdfs:subPropertyOf :sample .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#data_protocol
+
+:data_protocol rdf:type owl:DatatypeProperty ;
+               
+               rdfs:label "Data Protocol" ;
+               
+               rdfs:comment "An overview of the data protocol. Description about the software, pipeline and tools that was used to process the data. This can be seen as a abstract of the data handling protocols. Databases used, etc." ;
+               
+               rdfs:subPropertyOf :protocol .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#disease
+
+:disease rdf:type owl:DatatypeProperty ;
+         
+         rdfs:label "Disease" ;
+         
+         rdfs:comment "Disease related with the dataset and the sample under study" ;
+         
+         rdfs:subPropertyOf :sample .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#instrument_platform
+
+:instrument_platform rdf:type owl:DatatypeProperty ;
+                     
+                     rdfs:label "Instrument Platform" ;
+                     
+                     rdfs:comment "This information is realted with all instrument used to analyze the sample and related with the dataset" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#protocol
+
+:protocol rdf:type owl:DatatypeProperty ;
+          
+          rdfs:label "Protocol" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#publication
+
+:publication rdf:type owl:DatatypeProperty ;
+             
+             rdfs:label "Publication" ;
+             
+             rdfs:comment "Free text describing the publications, citation, title etc. Some resources do not provide information the pubmed publication or the original reference to it. In those cases omicsDI provides a mechanisms to add the publication as free text." .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#quantification_method
+
+:quantification_method rdf:type owl:DatatypeProperty ;
+                       
+                       rdfs:label "Quantification Method" ;
+                       
+                       rdfs:comment "Free text describing the quantitative method for example, ITRAQ, SILAC" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#sample
+
+:sample rdf:type owl:DatatypeProperty ;
+        
+        rdfs:label "Sample" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#sample_protocol
+
+:sample_protocol rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:label "Sample Protocol" ;
+                 
+                 rdfs:comment "An overview of the sample procol. Description about the general smaple handling and protocol." ;
+                 
+                 rdfs:subPropertyOf :protocol .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#software
+
+:software rdf:type owl:DatatypeProperty ;
+          
+          rdfs:label "Software" ;
+          
+          rdfs:comment "Software used in the experiment" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#species
+
+:species rdf:type owl:DatatypeProperty ;
+         
+         rdfs:label "Species" ;
+         
+         rdfs:comment "Specie related with the dataset experiment" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#submission_type
+
+:submission_type rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:label "Submission Type" ;
+                 
+                 rdfs:comment "In ProteomeXChange this field is used to classify the type of submissions" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#submitter_keywords
+
+:submitter_keywords rdf:type owl:DatatypeProperty ;
+                    
+                    rdfs:label "Submitter Keywords" ;
+                    
+                    rdfs:comment "Keywords related with the dataset, in this case their added by the submitter of the data" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#technology_type
+
+:technology_type rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:label "Technology Type" ;
+                 
+                 rdfs:comment "Technology type can be use to describe the experiment type or category, for example: MS/MS proteomics or SRM" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#tissue
+
+:tissue rdf:type owl:DatatypeProperty ;
+        
+        rdfs:label "Tissue" ;
+        
+        rdfs:comment "Tissue related with the dataset and samples under study" ;
+        
+        rdfs:subPropertyOf :sample .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://semanticscience.org/resource/SIO_001083
+
+sio:SIO_001083 owl:equivalentClass :Submission .
+
+
+
+###  http://semanticscience.org/resource/SIO_001314
+
+sio:SIO_001314 owl:equivalentClass :Publication .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#ArrayExpressEntry
+
+:ArrayExpressEntry rdf:type owl:Class ;
+                   
+                   rdfs:label "entry of ArrayExpress database" ;
+                   
+                   rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Creation
+
+:Creation rdf:type owl:Class ;
+          
+          rdfs:label "creation date" ;
+          
+          rdfs:subClassOf sio:SIO_000418 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#EgaEntry
+
+:EgaEntry rdf:type owl:Class ;
+          
+          rdfs:label "entry of EGA database" ;
+          
+          rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Export
+
+:Export rdf:type owl:Class ;
+        
+        rdfs:label "export date" ;
+        
+        rdfs:subClassOf sio:SIO_000418 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#ExpressionAtlasEntry
+
+:ExpressionAtlasEntry rdf:type owl:Class ;
+                      
+                      rdfs:label "entry of ExpressionAtlas database" ;
+                      
+                      rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#GnpsEntry
+
+:GnpsEntry rdf:type owl:Class ;
+           
+           rdfs:label "entry of GNPS database" ;
+           
+           rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#GpmdbEntry
+
+:GpmdbEntry rdf:type owl:Class ;
+            
+            rdfs:label "entry of GPMDB database" ;
+            
+            rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#LastModification
+
+:LastModification rdf:type owl:Class ;
+                  
+                  rdfs:label "last modification date" ;
+                  
+                  rdfs:subClassOf sio:SIO_000418 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#MassiveEntry
+
+:MassiveEntry rdf:type owl:Class ;
+              
+              rdfs:label "entry of MassIVE database" ;
+              
+              rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#MetaboLightsEntry
+
+:MetaboLightsEntry rdf:type owl:Class ;
+                   
+                   rdfs:label "entry of MetaboLights database" ;
+                   
+                   rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#MetabolomeExpressEntry
+
+:MetabolomeExpressEntry rdf:type owl:Class ;
+                        
+                        rdfs:label "entry of MetabolomeExpress database" ;
+                        
+                        rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#MetabolomicsWorkbenchEntry
+
+:MetabolomicsWorkbenchEntry rdf:type owl:Class ;
+                            
+                            rdfs:label "entry of MetabolomicsWorkbench database" ;
+                            
+                            rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#OmicsType
+
+:OmicsType rdf:type owl:Class ;
+           
+           rdfs:label "Omics Type" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Output
+
+:Output rdf:type owl:Class ;
+        
+        rdfs:label "output date" ;
+        
+        rdfs:subClassOf sio:SIO_000418 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#PeptideAtlasEntry
+
+:PeptideAtlasEntry rdf:type owl:Class ;
+                   
+                   rdfs:label "entry of PeptideAtlas database" ;
+                   
+                   rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#PrideEntry
+
+:PrideEntry rdf:type owl:Class ;
+            
+            rdfs:label "entry of PRIDE database" ;
+            
+            rdfs:subClassOf sio:SIO_000756 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Publication
+
+:Publication rdf:type owl:Class ;
+             
+             rdfs:label "publication date" ;
+             
+             rdfs:subClassOf sio:SIO_000418 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Ref
+
+:Ref rdf:type owl:Class ;
+     
+     rdfs:label "Reference Type" ;
+     
+     dct:description "Cross-reference entry" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Submission
+
+:Submission rdf:type owl:Class ;
+            
+            rdfs:label "submission date" ;
+            
+            rdfs:subClassOf sio:SIO_000418 .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Updated
+
+:Updated rdf:type owl:Class ;
+         
+         rdfs:label "updated date" ;
+         
+         rdfs:subClassOf sio:SIO_000418 .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Genomics
+
+:Genomics rdf:type owl:NamedIndividual ,
+                   :OmicsType ;
+          
+          rdfs:label "Genomics" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Metabolomics
+
+:Metabolomics rdf:type owl:NamedIndividual ,
+                       :OmicsType ;
+              
+              rdfs:label "Metabolomics" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Multi-Omics
+
+:Multi-Omics rdf:type owl:NamedIndividual ,
+                      :OmicsType ;
+             
+             rdfs:label "Multi-Omics" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Proteomics
+
+:Proteomics rdf:type owl:NamedIndividual ,
+                     :OmicsType ;
+            
+            rdfs:label "Proteomics" .
+
+
+
+###  https://raw.githubusercontent.com/OmicsDI-RDF/ontology/master/omicsdio.owl#Transcriptomics
+
+:Transcriptomics rdf:type owl:NamedIndividual ,
+                          :OmicsType ;
+                 
+                 rdfs:label "Transcriptomics" .
+
+
+
+
+###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
+
