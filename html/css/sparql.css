@@ -1,0 +1,21 @@
+.dbcls_table {
+	border: solid 1px #000000;
+}
+
+.dbcls_cell {
+	border: solid 1px #000000;
+}
+
+.dbcls_header_cell {
+	background-color: #000000;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.dbcls_content_odd_row {
+	background-color: #e0e0e0;
+}
+
+.dbcls_content_even_row {
+	background-color: #ffffff;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>FALDO Demo - humanrdf.dbcls.jp</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/sparql.css">
+    <style>
+        #result_box {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: solid 1px #000000;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript" ></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://humanrdf.dbcls.jp/js/sparql.js"></script>
+    <script src="http://humanrdf.dbcls.jp/js/faldo.js"></script>
+    <script>
+      var endpoint = 'http://humanrdf.dbcls.jp/sparql';
+
+      // clear result
+      function clear_result() {
+    	  $( '#result_box' ).html( '' );
+      }
+
+      // get array
+      function get_array( method ) {
+    	  var array = null;
+
+    	  if( method === 'overlapping' || method === 'including' ) {
+    		  array = [ 'region1', 'region2' ];
+    	  }
+    	  else if( method === 'upstream' ) {
+    		  array = ['region', 'length', 'relation'];
+    	  }
+
+    	  return array;
+      }
+
+      // on change
+      function on_change() {
+    	  var method = $( '#method' ).val();
+    	  var array = get_array( method );
+    	  $( '.tr' ).css( 'display', 'none' );
+
+    	  if( array == null ) {
+    		  $( '#input_table' ).css( 'display', 'none' );
+    	  }
+    	  else {
+    		  $( '#input_table' ).css( 'display', 'block' );
+    	      for( var i = 0; i < array.length; i++ ) {
+    		      $( '#' + array[ i ] + '_tr' ).css( 'display', 'block' );
+    	      }
+    	  }
+      }
+
+      // submit
+      function submit() {
+    	  var method = $( '#method' ).val();
+
+    	  var region = $( '#region' ).val();
+    	  var region1 = $( '#region1' ).val();
+    	  var region2 = $( '#region2' ).val();
+    	  var length = $( '#length' ).val();
+    	  var relation = $( '#relation' ).val();
+
+    	  clear_result();
+
+    	  if( method === 'overlapping' ) {
+    		  do_overlapping( region1, region2 );
+    	  }
+    	  else if( method === 'including' ) {
+    		  do_including( region1, region2 );
+    	  }
+    	  else if( method === 'upstream' ) {
+    		  do_upstream( region, length, relation );
+    	  }
+      }
+
+      // do including
+      function do_including( region1, region2 ) {
+    	  dbclsSparql.setEndpoint( endpoint );
+    	  var result = dbclsFaldo.isIncluding( region1, region2 );
+
+    	  writeRegionsTable( region1, region2 );
+
+    	  if( result ) {
+    		  $( '#result_p' ).html( 'Including' );
+    	  }
+    	  else {
+    		  $( '#result_p' ).html( 'Not Including' );
+    	  }
+      }
+
+      // do overlapping
+      function do_overlapping( region1, region2 ) {
+    	  dbclsSparql.setEndpoint( endpoint );
+    	  var result = dbclsFaldo.isOverlapping( region1, region2 );
+
+    	  writeRegionsTable( region1, region2 );
+
+    	  if( result ) {
+    		  $( '#result_p' ).html( 'Overlapping' );
+    	  }
+    	  else {
+    		  $( '#result_p' ).html( 'Not Overlapping' );
+    	  }
+      }
+
+      // do upstream
+      function do_upstream( region, length, relation ) {
+    	  var obj = dbclsFaldo.getRegion( region );
+    	  var objects = dbclsFaldo.getUpstreamRegions( region, parseInt( length, 10 ), parseInt( relation, 10 ) > 0 );
+
+    	  $( '#result_box' ).html( '<div id="base_table"></div><h2>Result</h2><p id="num_p"></p><div id="result_table"></div>' );
+
+    	  dbclsSparql.addTableFromObjects( $( '#base_table' ), 'dbcls', [ obj ] );
+    	  dbclsSparql.addTableFromObjects( $( '#result_table' ), 'dbcls', objects );
+    	  $( '#num_p' ).html( objects.length );
+      }
+
+      // write two region tables
+      function writeRegionsTable( region1, region2 ) {
+    	  var obj1 = dbclsFaldo.getRegion( region1 );
+    	  var obj2 = dbclsFaldo.getRegion( region2 );
+
+    	  var objects = [ obj1, obj2 ];
+
+    	  $( '#result_box' ).html( '<div id="result_table"></div><p id="result_p"></p>' );
+
+    	  dbclsSparql.addTableFromObjects( $( '#result_table' ), 'dbcls', objects );
+      }
+
+      // ready
+      $(document).ready(
+          function() {
+        	  on_change();
+        	  $( '#method' ).change( on_change );
+
+        	  $( '#button' ).click( submit );
+          }
+      );
+	</script>
+  </head>
+  <body>
+    <h1>FALDO Demo - humanrdf.dbcls.jp</h1>
+    <div style="border-bottom: solid 1px #000000; padding-bottom: 10px">
+      <select id="method">
+        <option value="clear">Clear</option>
+        <option value="overlapping">Overlapping</option>
+        <option value="including">Including</option>
+        <option value="upstream">Upstream</option>
+      </select>
+    </div>
+    <table id='input_table' style="margin: 10px 5px;">
+      <tr id="region_tr" class="tr">
+        <th>Region</th>
+        <td><input type="text" id="region" value="A549H3K27ac_peak_32"></td>
+      </tr>
+      <tr id="region1_tr" class="tr">
+        <th>Region 1</th>
+        <td><input type="text" id="region1" value="A549H3K27ac_peak_32"></td>
+      </tr>
+      <tr id="region2_tr" class="tr">
+        <th>Region 2</th>
+        <td><input type="text" id="region2" value="A549H3K4me1_peak_30"></td>
+      </tr>
+      <tr id="length_tr" class="tr">
+        <th>Length</th>
+        <td><input id="length" type="text" value="1000"></td>
+      </tr>
+      <tr id="relation_tr" class="tr">
+        <th>Relation</th>
+        <td>
+          <select id="relation">
+            <option value="0">Overlapping</option>
+            <option value="1">Including</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <button id="button">Submit</button>
+    <form id="form">
+    </form>
+    <div id="result_box"></div>
+  </body>
+</html>

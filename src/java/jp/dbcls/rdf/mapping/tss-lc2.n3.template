@@ -1,0 +1,180 @@
+@prefix map: <#> .
+@prefix db: <> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix kero: <http://dbtss.hgc.jp/rdf/ontology/> .
+@prefix faldo: <http://biohackathon.org/resource/faldo#> .
+@prefix dbsnp: <http://info.identifiers.org/dbsnp/> .
+@prefix ncbisnp: <http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=> .
+@prefix ensemblvariation: <https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#> .
+
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+	d2rq:jdbcDSN "jdbc:mysql://{{SQLServer}}/{{Database}}";
+	d2rq:username "{{User}}";
+	d2rq:password "{{Password}}";
+	jdbc:autoReconnect "true";
+	jdbc:zeroDateTimeBehavior "convertToNull";
+	.
+
+# Experiment
+map:tse000086 a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "http://dbtss.hgc.jp/rdf/experiment/TSE000086";
+	d2rq:class kero:Experiment;
+	.
+
+# SNV
+[TssBincountTable]
+map:{{TssBincountTable}} a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tse000086;
+	d2rq:property kero:has_TSS;
+	d2rq:uriPattern "http://kero.hgc.jp/rdf/tss/TSE000086/@@{{TssBincountTable}}.id@@";
+	.
+
+map:{{TssBincountTable}}_class a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "http://dbtss.hgc.jp/rdf/tss/TSE000086/@@{{TssBincountTable}}.id@@";
+	d2rq:class obo:SO_0000315;
+	.
+map:{{TssBincountTable}}_pos_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_class;
+	d2rq:property faldo:location;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, '-', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_pos_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_class;
+	d2rq:property faldo:location;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, '-', {{TssBincountTable}}.pos, ':2' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_faldo_region_f a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, '-', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:class faldo:Region;
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_faldo_region_r a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, '-', {{TssBincountTable}}.pos, ':2' )";
+	d2rq:class faldo:Region;
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_region_label_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_f;
+	d2rq:property rdfs:label;
+	d2rq:pattern "GRCh38 @@{{TssBincountTable}}.chr@@:@@{{TssBincountTable}}.pos@@-@@{{TssBincountTable}}.pos@@ Forward";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_region_label_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_r;
+	d2rq:property rdfs:label;
+	d2rq:pattern "GRCh38 @@{{TssBincountTable}}.chr@@:@@{{TssBincountTable}}.pos@@-@@{{TssBincountTable}}.pos@@ Reverse";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_region_begin_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_f;
+	d2rq:property faldo:begin;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_region_begin_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_r;
+	d2rq:property faldo:begin;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':2' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_region_end_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_f;
+	d2rq:property faldo:end;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_region_end_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_r;
+	d2rq:property faldo:end;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':2' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_region_id_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_f;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat('chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, '-', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_region_id_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_region_r;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat('chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, '-', {{TssBincountTable}}.pos, ':2' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_faldo_pos_f a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:class faldo:ExactPosition, faldo:ForwardStrandPosition;
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_faldo_pos_r a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':2' )";
+	d2rq:class faldo:ExactPosition, faldo:ReverseStrandPosition;
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_pos_label_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_f;
+	d2rq:property rdfs:label;
+	d2rq:pattern "GRCh38 @@{{TssBincountTable}}.chr@@:@@{{TssBincountTable}}.pos@@ Forward";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_pos_label_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_r;
+	d2rq:property rdfs:label;
+	d2rq:pattern "GRCh38 @@{{TssBincountTable}}.chr@@:@@{{TssBincountTable}}.pos@@ Reverse";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_pos_pos_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_f;
+	d2rq:property faldo:position;
+	d2rq:column "{{TssBincountTable}}.pos";
+	d2rq:datatype xsd:int;
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_pos_pos_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_r;
+	d2rq:property faldo:position;
+	d2rq:column "{{TssBincountTable}}.pos";
+	d2rq:datatype xsd:int;
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_pos_ref_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_f;
+	d2rq:property faldo:reference;
+	d2rq:uriSqlExpression "concat( 'http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:1', substring({{TssBincountTable}}.chr, 4) )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_pos_ref_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_r;
+	d2rq:property faldo:reference;
+	d2rq:uriSqlExpression "concat( 'http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:2', substring({{TssBincountTable}}.chr, 4) )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+map:{{TssBincountTable}}_pos_id_f a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_f;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat('chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'F'";
+	.
+map:{{TssBincountTable}}_pos_id_r a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{TssBincountTable}}_faldo_pos_r;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat('chromosome:GRCh38:', substring({{TssBincountTable}}.chr, 4), ':', {{TssBincountTable}}.pos, ':1' )";
+	d2rq:condition "{{TssBincountTable}}.strand = 'R'";
+	.
+[/TssBincountTable]

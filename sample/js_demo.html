@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>JS Demo</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/sparql.css">
+
+    <!--  テーブルのデザイン -->
+    <style>
+        .demo_table {
+            border: solid 1px #000000;
+        }
+
+        .demo_cell {
+            border: solid 1px #000000;
+        }
+
+        .demo_header_cell {
+	        background-color: #000000;
+        	color: #ffffff;
+	        font-weight: bold;
+        }
+
+        .demo_content_odd_row {
+	        background-color: #e0e0e0;
+        }
+
+        .demo_content_even_row {
+	        background-color: #ffffff;
+        }
+    </style>
+
+    <!-- 必要ライブラリ -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript" ></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://humanrdf.dbcls.jp/js/sparql.js"></script>
+    <script src="http://humanrdf.dbcls.jp/js/faldo.js"></script>
+    <script>
+      // 読み込み時関数定義
+      function ready() {
+    	  // Endpoint セット
+    	  var endpoint = 'http://humanrdf.dbcls.jp/sparql';
+    	  dbclsSparql.setEndpoint( endpoint );
+
+    	  // Chromosome1, 範囲 1200000 - 130000 にある情報を取得。(重なれば OK)
+    	  var objects = dbclsFaldo.getRegionsInRange( 'chr1', 1200000, 1300000, false );
+
+    	  // テーブル追加
+    	  dbclsSparql.addTableFromObjects( $( '#result_box' ), 'demo', objects );
+      }
+
+      // 読み込み時関数呼び出し
+      $( function() {
+    	  ready();
+      })
+	</script>
+  </head>
+  <body>
+    <h1>JS ライブラリプログラム例</h1>
+
+    <!-- テーブル表示領域 -->
+    <div id="result_box"></div>
+  </body>
+</html>

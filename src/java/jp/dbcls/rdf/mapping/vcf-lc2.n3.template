@@ -1,0 +1,214 @@
+@prefix map: <#> .
+@prefix db: <> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix kero: <http://dbtss.hgc.jp/rdf/ontology/> .
+@prefix faldo: <http://biohackathon.org/resource/faldo#> .
+@prefix dbsnp: <http://info.identifiers.org/dbsnp/> .
+@prefix ncbisnp: <http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=> .
+@prefix ensemblvariation: <https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#> .
+
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+	d2rq:jdbcDSN "jdbc:mysql://{{SQLServer}}/{{Database}}";
+	d2rq:username "{{User}}";
+	d2rq:password "{{Password}}";
+	jdbc:autoReconnect "true";
+	jdbc:zeroDateTimeBehavior "convertToNull";
+	.
+
+# Experiment
+map:tse000086 a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "http://dbtss.hgc.jp/rdf/experiment/TSE000086";
+	d2rq:class kero:Experiment;
+	.
+
+# SNV
+[VcfInfTable]
+map:{{VcfInfTable}} a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:tse000086;
+	d2rq:property kero:has_SNV;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos)";
+	.
+
+map:{{VcfInfTable}}_class a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos)";
+	d2rq:class obo:SO_0001483;
+	.
+map:{{VcfInfTable}}_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property rdfs:label;
+	d2rq:pattern "variation on @@{{VcfInfTable}}.chr@@:@@{{VcfInfTable}}.pos@@ from TSE000086";
+	.
+map:{{VcfInfTable}}_info a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property kero:additionalInformation;
+	d2rq:column "{{VcfInfTable}}.info";
+	.
+map:{{VcfInfTable}}_af a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property kero:alleleFrequency;
+	d2rq:column "{{VcfInfTable}}.af";
+	d2rq:datatype xsd:double;
+	.
+map:{{VcfInfTable}}_ad a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property kero:allelicDepth;
+	d2rq:column "{{VcfInfTable}}.ad";
+	.
+map:{{VcfInfTable}}_known a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property kero:dbsnpID;
+	d2rq:column "{{VcfInfTable}}.known";
+	d2rq:condition "{{VcfInfTable}}.known != '.'";
+	.
+map:{{VcfInfTable}}_gt a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property kero:genotype;
+	d2rq:column "{{VcfInfTable}}.gt";
+	.
+map:{{VcfInfTable}}_datail a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property kero:genotypeData;
+	d2rq:column "{{VcfInfTable}}.detail";
+	.
+map:{{VcfInfTable}}_gq a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property kero:quality;
+	d2rq:column "{{VcfInfTable}}.gq";
+	d2rq:datatype xsd:double;
+	.
+map:{{VcfInfTable}}_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat(substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos)";
+	.
+map:{{VcfInfTable}}_dbsnp a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property rdfs:seeAlso;
+	d2rq:uriPattern "dbsnp:@@{{VcfInfTable}}.known@@";
+	d2rq:condition "{{VcfInfTable}}.known != '.'";
+	.
+map:{{VcfInfTable}}_ncbisnp a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property rdfs:seeAlso;
+	d2rq:uriPattern "ncbisnp:@@{{VcfInfTable}}.known@@";
+	d2rq:condition "{{VcfInfTable}}.known != '.'";
+	.
+[/VcfInfTable]
+
+# Allele
+[VcfInfTable]
+map:{{VcfInfTable}}_allele_ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property ensemblvariation:has_allele;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 1, 1))";
+	.
+map:{{VcfInfTable}}_allele_alt a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property ensemblvariation:has_allele;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 3, 1))";
+	.
+map:{{VcfInfTable}}_allele_ref_class a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 1, 1))";
+	d2rq:class ensemblvariation:reference_allele, ensemblvariation:ancestral_allele;
+	.
+map:{{VcfInfTable}}_allele_alt_class a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/data/TSE000086/', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 3, 1))";
+	d2rq:class ensemblvariation:derived_allele;
+	.
+map:{{VcfInfTable}}_allele_ref_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_allele_ref_class;
+	d2rq:property rdfs:label;
+	d2rq:sqlExpression "concat('TSE000086 ', {{VcfInfTable}}.chr, ':', {{VcfInfTable}}.pos, ' allele ', substring({{VcfInfTable}}.bases, 1, 1))";
+	.
+map:{{VcfInfTable}}_allele_alt_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_allele_alt_class;
+	d2rq:property rdfs:label;
+	d2rq:sqlExpression "concat('TSE000086 ', {{VcfInfTable}}.chr, ':', {{VcfInfTable}}.pos, ' allele ', substring({{VcfInfTable}}.bases, 3, 1))";
+	.
+map:{{VcfInfTable}}_allele_ref_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_allele_ref_class;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat(substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 1, 1))";
+	.
+map:{{VcfInfTable}}_allele_alt_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_allele_alt_class;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat(substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '#', substring({{VcfInfTable}}.bases, 3, 1))";
+	.
+[/VcfInfTable]
+
+# Faldo Region
+[VcfInfTable]
+map:{{VcfInfTable}}_pos a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_class;
+	d2rq:property faldo:location;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '-', {{VcfInfTable}}.pos, ':1' )";
+	.
+map:{{VcfInfTable}}_faldo_region a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '-', {{VcfInfTable}}.pos, ':1' )";
+	d2rq:class faldo:Region;
+	.
+map:{{VcfInfTable}}_region_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_region;
+	d2rq:property rdfs:label;
+	d2rq:pattern "GRCh38 @@{{VcfInfTable}}.chr@@:@@{{VcfInfTable}}.pos@@-@@{{VcfInfTable}}.pos@@ Forward";
+	.
+map:{{VcfInfTable}}_region_begin a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_region;
+	d2rq:property faldo:begin;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, ':1' )";
+	.
+map:{{VcfInfTable}}_region_end a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_region;
+	d2rq:property faldo:end;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, ':1' )";
+	.
+map:{{VcfInfTable}}_region_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_region;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat('chromosome:GRCh38:', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, '-', {{VcfInfTable}}.pos, ':1' )";
+	.
+[/VcfInfTable]
+
+# Faldo Position
+[VcfInfTable]
+map:{{VcfInfTable}}_faldo_pos a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriSqlExpression "concat('http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, ':1' )";
+	d2rq:class faldo:ExactPosition, faldo:ForwardStrandPosition;
+	.
+map:{{VcfInfTable}}_pos_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_pos;
+	d2rq:property rdfs:label;
+	d2rq:pattern "GRCh38 @@{{VcfInfTable}}.chr@@:@@{{VcfInfTable}}.pos@@ Forward";
+	.
+map:{{VcfInfTable}}_pos_pos a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_pos;
+	d2rq:property faldo:position;
+	d2rq:column "{{VcfInfTable}}.pos";
+	d2rq:datatype xsd:int;
+	.
+map:{{VcfInfTable}}_pos_ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_pos;
+	d2rq:property faldo:reference;
+	d2rq:uriSqlExpression "concat( 'http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:1', substring({{VcfInfTable}}.chr, 4) )"
+	.
+map:{{VcfInfTable}}_pos_id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:{{VcfInfTable}}_faldo_pos;
+	d2rq:property dc:identifier;
+	d2rq:sqlExpression "concat('chromosome:GRCh38:', substring({{VcfInfTable}}.chr, 4), ':', {{VcfInfTable}}.pos, ':1' )";
+	.
+[/VcfInfTable]

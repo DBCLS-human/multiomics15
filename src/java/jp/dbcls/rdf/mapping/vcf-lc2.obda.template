@@ -1,0 +1,171 @@
+\[PrefixDeclaration\]
+:                   http://dbtss.hgc.jp/rdf/ontology#
+xsd:                http://www.w3.org/2001/XMLSchema#
+owl:                http://www.w3.org/2002/07/owl#
+rdf:                http://www.w3.org/1999/02/22-rdf-syntax-ns#
+rdfs:               http://www.w3.org/TR/rdf-schema/#
+obo:                http://purl.obolibrary.org/obo/
+dc:                 http://purl.org/dc/terms/
+kero:               http://dbtss.hgc.jp/rdf/ontology/
+faldo:              http://biohackathon.org/resource/faldo#
+dbsnp:              http://info.identifiers.org/dbsnp/
+ncbisnp:            http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=
+ensemblvariation:   https://github.com/simonjupp/ensembl-rdf/blob/master/ontology/ensembl_variation_ontology.owl#
+
+\[SourceDeclaration\]
+sourceUri       dbtss-connection
+connectionUrl   jdbc:mysql://{{SQLServer}}/{{Database}}
+username        {{User}}
+password        {{Password}}
+driverClass     com.mysql.jdbc.Driver
+
+\[MappingDeclaration\] @collection \[\[
+mappingId   example
+target      <http://dbtss.hgc.jp/rdf/experiment/TSE000086> a kero:Experiment .
+source      select count(*) from vcf_inf_9606_chr1_lc2ad
+
+[VcfInfTable]
+mappingId   {{VcfInfTable}}
+target      <http://dbtss.hgc.jp/rdf/experiment/TSE000086> kero:has_SNV <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_class
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> a obo:SO_0001483 .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_label
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> rdfs:label "variation on {chr}:{pos} from TSE000086" .
+source      select chr, substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_info
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> kero:alleleFrequency {af}^^xsd:double .
+source      select substring( chr, 4 ) as chrom, pos, af from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_ad
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> kero:allelicDepth "{ad}" .
+source      select substring( chr, 4 ) as chrom, pos, ad from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_known
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> kero:dbsnpID "{known}" .
+source      select substring( chr, 4 ) as chrom, pos, known from {{VcfInfTable}} where known != '.'
+
+mappingId   {{VcfInfTable}}_gt
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> kero:genotype "{gt}" .
+source      select substring( chr, 4 ) as chrom, pos, gt from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_datail
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> kero:genotypeData "{detail}" .
+source      select substring( chr, 4 ) as chrom, pos, detail from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_gq
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> kero:quality {gq}^^xsd:double .
+source      select substring( chr, 4 ) as chrom, pos, gq from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_id
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> dc:identifier "{chrom}:{pos}" .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_dbsnp
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> rdfs:seeAlso dbsnp:{known} .
+source      select substring( chr, 4 ) as chrom, pos, known from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_ncbisnp
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> rdfs:seeAlso ncbisnp:{known} .
+source      select substring( chr, 4 ) as chrom, pos, known from {{VcfInfTable}}
+[/VcfInfTable]
+
+[VcfInfTable]
+mappingId   {{VcfInfTable}}_allele_ref
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> ensemblvariation:has_allele <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{ref}> .
+source      select substring( chr, 4 ) as chrom, pos, substring( bases, 1, 1 ) as ref from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_alt
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> ensemblvariation:has_allele <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{alt}> .
+source      select substring( chr, 4 ) as chrom, pos, substring( bases, 3, 1 ) as alt from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_ref_class_ref
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{ref}> a ensemblvariation:reference_allele .
+source      select substring( chr, 4 ) as chrom, pos, substring( bases, 1, 1 ) as ref from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_ref_class_anc
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{ref}> a ensemblvariation:ancestral_allele .
+source      select substring( chr, 4 ) as chrom, pos, substring( bases, 1, 1 ) as ref from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_alt_class
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{alt}> a ensemblvariation:derived_allele .
+source      select substring( chr, 4 ) as chrom, pos, substring( bases, 3, 1 ) as alt from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_ref_label
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{ref}> rdfs:label "TSE000086 {chr}:{pos} allele {ref}" .
+source      select chr, substring( chr, 4 ) as chrom, pos, substring( bases, 1, 1 ) as ref from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_alt_label
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{alt}> rdfs:label "TSE000086 {chr}:{pos} allele {alt}" .
+source      select chr, substring( chr, 4 ) as chrom, pos, substring( bases, 3, 1 ) as alt from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_ref_id
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{ref}> rdfs:label "{chrom}:{pos}#{ref}" .
+source      select chr, substring( chr, 4 ) as chrom, pos, substring( bases, 1, 1 ) as ref from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_allele_alt_id
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}#{alt}> rdfs:label "{chrom}:{pos}#{alt}" .
+source      select chr, substring( chr, 4 ) as chrom, pos, substring( bases, 3, 1 ) as alt from {{VcfInfTable}}
+[/VcfInfTable]
+
+[VcfInfTable]
+mappingId   {{VcfInfTable}}_location
+target      <http://dbtss.hgc.jp/rdf/data/TSE000086/{chrom}:{pos}> faldo:location <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}-{pos}:1> .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_faldo_region
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}-{pos}:1> a faldo:Region .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_region_label
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}-{pos}:1> rdfs:label "GRCh38 {chr}:{pos}-{pos} Forward" .
+source      select chr, substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_region_label
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}-{pos}:1> rdfs:label "GRCh38 {chr}:{pos}-{pos} Forward" .
+source      select chr, substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_region_begin
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}-{pos}:1> faldo:begin <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_region_begin
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}-{pos}:1> faldo:end <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_region_begin
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}-{pos}:1> dc:identifier "chromosome:GRCh38:{chrom}:{pos}-{pos}:1" .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+[/VcfInfTable]
+
+[VcfInfTable]
+mappingId   {{VcfInfTable}}_faldo_pos_exact
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> a faldo:ExactPosition .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_faldo_pos_forward
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> a faldo:ForwardStrandPosition .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_pos_pos
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> faldo:position {pos}^^xsd:int .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_pos_label
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> rdfs:label "GRCh38 {chr}:{pos} Forward" .
+source      select chr, substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_pos_ref
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> faldo:reference <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}> .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+
+mappingId   {{VcfInfTable}}_pos_id
+target      <http://dbtss.hgc.jp/rdf/location/chromosome:GRCh38:{chrom}:{pos}:1> dc:identifier "chromosome:GRCh38:{pos}:1" .
+source      select substring( chr, 4 ) as chrom, pos from {{VcfInfTable}}
+[/VcfInfTable]
+
+\]\]

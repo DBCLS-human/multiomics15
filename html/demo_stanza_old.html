@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>TogoStanza Demo (Old)- humanrdf.dbcls.jp</title>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="import" href="http://humanrdf.dbcls.jp/stanza/allele/">
+    <link rel="import" href="http://humanrdf.dbcls.jp/stanza/beacon/">
+    <link rel="import" href="http://humanrdf.dbcls.jp/stanza/snv/">
+    <script>
+      function get_array( method ) {
+          var array = null;
+          if( method === 'allele' ) {
+              array = ['sample', 'chromosome', 'position'];
+          }
+          else if( method === 'beacon' ) {
+              array = ['sample', 'chromosome', 'position', 'allele'];
+          }
+          else if( method === 'snv' ) {
+              array = ['sample', 'chromosome', 'range_start', 'range_end'];
+          }
+
+          return array;
+      }
+
+      function change_method() {
+          var method = $('#method').val();
+          var array = get_array( method );
+
+          $('#sample_tr').css('display', 'none');
+          $('#chromosome_tr').css('display', 'none');
+          $('#position_tr').css('display', 'none');
+          $('#allele_tr').css('display', 'none');
+          $('#range_start_tr').css('display', 'none');
+          $('#range_end_tr').css('display', 'none');
+
+          for(var i = 0; i < array.length; i++ ) {
+             $('#' + array[ i ] + '_tr').css('display', 'block')
+      }
+      }
+
+      function submit() {
+          var method = $('#method').val();
+          var array = get_array( method );
+          var action = 'http://humanrdf.dbcls.jp/stanza1/' + method;
+          $( '.hidden' ).remove();
+          $( '#form' ).attr( 'action', action );
+          $( '#form' ).attr( 'method', 'get' );
+
+          for( var i = 0; i < array.length; i++ ) {
+              var name = array[ i ];
+              var val = $( '#' + name ).val();
+              var tag = '<input type="hidden" class="hidden" name="'
+                      + name + '" value="' + val + '">';
+              $( '#form' ).append( tag );
+          }
+
+          $( '#form' ).submit();
+      }
+
+      $(document).ready(
+          function() {
+              $('#method').val('allele');
+          change_method();
+          $('#method').change(change_method);
+              $('#button').click(submit);
+          }
+      );
+    </script>
+  </head>
+  <body>
+    <h1>TogoStanza Demo (Old)- humanrdf.dbcls.jp</h1>
+    <div style="border-bottom: solid 1px #000000;">
+      <select id="method" name="method">
+    <option value="allele">Allele</option>
+    <option value="beacon">Beacon</option>
+    <option value="snv">SNV</option>
+      </select>
+    </div>
+
+    <table style="margin: 10px 5px;">
+      <tr id="sample_tr">
+        <th>Sample</th>
+        <td><input id="sample" type="text" value="TSE000086"></td>
+      </tr>
+      <tr id="chromosome_tr">
+        <th>Chromosome</th>
+        <td>
+          <select id="chromosome">
+            <option value="1" selected>chr1</option>
+            <option value="2">chr2</option>
+            <option value="3">chr3</option>
+            <option value="4">chr4</option>
+            <option value="5">chr5</option>
+            <option value="6">chr6</option>
+            <option value="7">chr7</option>
+            <option value="8">chr8</option>
+            <option value="9">chr9</option>
+            <option value="10">chr10</option>
+            <option value="11">chr11</option>
+            <option value="12">chr12</option>
+            <option value="13">chr13</option>
+            <option value="14">chr14</option>
+            <option value="15">chr15</option>
+            <option value="16">chr16</option>
+            <option value="17">chr17</option>
+            <option value="18">chr18</option>
+            <option value="19">chr19</option>
+            <option value="20">chr20</option>
+            <option value="21">chr21</option>
+            <option value="22">chr22</option>
+            <option value="X">chrX</option>
+            <option value="Y">chrY</option>
+            <option value="M">chrM</option>
+          </select>
+        </td>
+      </tr>
+      <tr id="position_tr">
+        <th>Position</th>
+        <td><input id="position" value="10234"></td>
+      </tr>
+      <tr id="allele_tr">
+        <th>Alternative Allele</th>
+        <td>
+          <select id="allele">
+            <option value="A">A</option>
+            <option value="T" selected>T</option>
+            <option value="G">G</option>
+            <option value="C">C</option>
+          </select>
+        </td>
+      </tr>
+      <tr id="range_start_tr">
+        <th>Range (Start)</th>
+        <td><input id="range_start" value="10000"></td>
+      </tr>
+      <tr id="range_end_tr">
+      <th>Range (End)</th>
+        <td><input id="range_end" value="11000"></td>
+      </tr>
+    </table>
+    <form id="form">
+        <button id="button">Submit</button>
+    </form>
+  </body>
+</html>

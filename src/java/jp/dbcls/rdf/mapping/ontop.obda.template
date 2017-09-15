@@ -1,0 +1,311 @@
+\[PrefixDeclaration\]
+:		http://dbtss.hgc.jp/rdf/ontology#
+xsd:		http://www.w3.org/2001/XMLSchema#
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+rdfs:		http://www.w3.org/TR/rdf-schema/#
+
+\[SourceDeclaration\]
+sourceUri       dbtss-connection
+connectionUrl   jdbc:mysql://{{SQLServer}}/{{Database}}
+username        {{User}}
+password        {{Password}}
+driverClass     com.mysql.jdbc.Driver
+
+\[MappingDeclaration\] @collection \[\[
+[BSDataTable]
+mappingId	{{BSDataTable}} bs_data_id
+target		<http://dbtss.hgc.jp/rdf/data#{{BSDataTable}}/{bs_data_id}> a :{{BSDataTable}} .
+source		SELECT bs_data_id FROM {{BSDataTable}}
+
+mappingId	{{BSDataTable}} bin
+target		<http://dbtss.hgc.jp/rdf/data#{{BSDataTable}}/{bs_data_id}> :bin {bin} .
+source		SELECT bs_data_id,bin FROM {{BSDataTable}}
+
+mappingId	{{BSDataTable}} chr
+target		<http://dbtss.hgc.jp/rdf/data#{{BSDataTable}}/{bs_data_id}> :chr {chr} .
+source		SELECT bs_data_id,chr FROM {{BSDataTable}}
+
+mappingId	{{BSDataTable}} pos
+target		<http://dbtss.hgc.jp/rdf/data#{{BSDataTable}}/{bs_data_id}> :pos {pos} .
+source		SELECT bs_data_id,pos FROM {{BSDataTable}}
+
+mappingId	{{BSDataTable}} cg_num
+target		<http://dbtss.hgc.jp/rdf/data#{{BSDataTable}}/{bs_data_id}> :cg_num {cg_num} .
+source		SELECT bs_data_id,cg_num FROM {{BSDataTable}}
+
+mappingId	{{BSDataTable}} ca_num
+target		<http://dbtss.hgc.jp/rdf/data#{{BSDataTable}}/{bs_data_id}> :ca_num {ca_num} .
+source		SELECT bs_data_id,ca_num FROM {{BSDataTable}}
+[/BSDataTable]
+
+[ChipInfTable]
+mappingId	{{ChipInfTable}} id
+target		<http://dbtss.hgc.jp/rdf/data#{{ChipInfTable}}/{id}> a :{{ChipInfTable}} .
+source		SELECT id FROM {{ChipInfTable}}
+
+mappingId	{{ChipInfTable}} bin
+target		<http://dbtss.hgc.jp/rdf/data#{{ChipInfTable}}/{id}> :bin {bin} .
+source		SELECT id,bin FROM {{ChipInfTable}}
+
+mappingId	{{ChipInfTable}} chr
+target		<http://dbtss.hgc.jp/rdf/data#{{ChipInfTable}}/{id}> :chr {chr} .
+source		SELECT id,chr FROM {{ChipInfTable}}
+
+mappingId	{{ChipInfTable}} start
+target		<http://dbtss.hgc.jp/rdf/data#{{ChipInfTable}}/{id}> :start {start} .
+source		SELECT id,start FROM {{ChipInfTable}}
+
+mappingId	{{ChipInfTable}} end
+target		<http://dbtss.hgc.jp/rdf/data#{{ChipInfTable}}/{id}> :end {end} .
+source		SELECT id,end FROM {{ChipInfTable}}
+
+mappingId	{{ChipInfTable}} num
+target		<http://dbtss.hgc.jp/rdf/data#{{ChipInfTable}}/{id}> :num {num} .
+source		SELECT id,num FROM {{ChipInfTable}}
+[/ChipInfTable]
+
+[ChromhmmInfTable]
+mappingId	{{ChromhmmInfTable}} id
+target		<http://dbtss.hgc.jp/rdf/data#{{ChromhmmInfTable}}/{id}> a :{{ChromhmmInfTable}} .
+source		SELECT id FROM {{ChromhmmInfTable}}
+
+mappingId	{{ChromhmmInfTable}} bin
+target		<http://dbtss.hgc.jp/rdf/data#{{ChromhmmInfTable}}/{id}> :bin {bin} .
+source		SELECT id,bin FROM {{ChromhmmInfTable}}
+
+mappingId	{{ChromhmmInfTable}} chr
+target		<http://dbtss.hgc.jp/rdf/data#{{ChromhmmInfTable}}/{id}> :chr {chr} .
+source		SELECT id,chr FROM {{ChromhmmInfTable}}
+
+mappingId	{{ChromhmmInfTable}} start
+target		<http://dbtss.hgc.jp/rdf/data#{{ChromhmmInfTable}}/{id}> :start {start} .
+source		SELECT id,start FROM {{ChromhmmInfTable}}
+
+mappingId	{{ChromhmmInfTable}} end
+target		<http://dbtss.hgc.jp/rdf/data#{{ChromhmmInfTable}}/{id}> :end {end} .
+source		SELECT id,end FROM {{ChromhmmInfTable}}
+
+mappingId	{{ChromhmmInfTable}} type
+target		<http://dbtss.hgc.jp/rdf/data#{{ChromhmmInfTable}}/{id}> :type {type} .
+source		SELECT id,type FROM {{ChromhmmInfTable}}
+
+mappingId	{{ChromhmmInfTable}} color
+target		<http://dbtss.hgc.jp/rdf/data#{{ChromhmmInfTable}}/{id}> :color {color} .
+source		SELECT id,color FROM {{ChromhmmInfTable}}
+[/ChromhmmInfTable]
+
+[CpgBincountTable]
+mappingId	{{CpgBincountTable}} id
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> a :{{CpgBincountTable}} .
+source		SELECT id FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} bin
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :bin {bin} .
+source		SELECT id,bin FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} chr
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :chr {chr} .
+source		SELECT id,chr FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} start
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :start {start} .
+source		SELECT id,start FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} end
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :end {end} .
+source		SELECT id,end FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} name
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :name {name} .
+source		SELECT id,name FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} length
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :length {length} .
+source		SELECT id,length FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} cpgNum
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :cpgNum {cpgNum} .
+source		SELECT id,cpgNum FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} gcNum
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :gcNum {gcNum} .
+source		SELECT id,gcNum FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} perCpg
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :perCpg {perCpg} .
+source		SELECT id,perCpg FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} perGc
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :perGc {perGc} .
+source		SELECT id,perGc FROM {{CpgBincountTable}}
+
+mappingId	{{CpgBincountTable}} obsExp
+target		<http://dbtss.hgc.jp/rdf/data#{{CpgBincountTable}}/{id}> :obsExp {obsExp} .
+source		SELECT id,obsExp FROM {{CpgBincountTable}}
+[/CpgBincountTable]
+
+[RnaseqQtyTable]
+mappingId	{{RnaseqQtyTable}} group_id
+target		<http://dbtss.hgc.jp/rdf/data#{{RnaseqQtyTable}}/{group_id}> a :{{RnaseqQtyTable}} .
+source		SELECT group_id FROM {{RnaseqQtyTable}}
+
+mappingId	{{RnaseqQtyTable}} tag
+target		<http://dbtss.hgc.jp/rdf/data#{{RnaseqQtyTable}}/{group_id}> :tag {tag} .
+source		SELECT group_id,tag FROM {{RnaseqQtyTable}}
+
+mappingId	{{RnaseqQtyTable}} ppm
+target		<http://dbtss.hgc.jp/rdf/data#{{RnaseqQtyTable}}/{group_id}> :ppm {ppm} .
+source		SELECT group_id,ppm FROM {{RnaseqQtyTable}}
+
+mappingId	{{RnaseqQtyTable}} rpkm
+target		<http://dbtss.hgc.jp/rdf/data#{{RnaseqQtyTable}}/{group_id}> :rpkm {rpkm} .
+source		SELECT group_id,rpkm FROM {{RnaseqQtyTable}}
+[/RnaseqQtyTable]
+
+[TssBincountTable]
+mappingId	{{TssBincountTable}} id
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> a :{{TssBincountTable}} .
+source		SELECT id FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} bin
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :bin {bin} .
+source		SELECT id,bin FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} chr
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :chr {chr} .
+source		SELECT id,chr FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} pos
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :pos {pos} .
+source		SELECT id,pos FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} strand
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :strand {strand} .
+source		SELECT id,strand FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} count
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :count {count} .
+source		SELECT id,count FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} repgrp
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :repgrp {repgrp} .
+source		SELECT id,repgrp FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} repprm
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :repprm {repprm} .
+source		SELECT id,repprm FROM {{TssBincountTable}}
+
+mappingId	{{TssBincountTable}} rep
+target		<http://dbtss.hgc.jp/rdf/data#{{TssBincountTable}}/{id}> :rep {rep} .
+source		SELECT id,rep FROM {{TssBincountTable}}
+[/TssBincountTable]
+
+[VcfInfTable]
+mappingId	{{VcfInfTable}} id
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> a :{{VcfInfTable}} .
+source		SELECT id FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} bin
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :bin {bin} .
+source		SELECT id,bin FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} chr
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :chr {chr} .
+source		SELECT id,chr FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} pos
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :pos {pos} .
+source		SELECT id,pos FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} known
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :known {known} .
+source		SELECT id,known FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} bases
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :bases {bases} .
+source		SELECT id,bases FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} ad
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :ad {ad} .
+source		SELECT id,ad FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} gt
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :gt {gt} .
+source		SELECT id,gt FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} gq
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :gq {gq} .
+source		SELECT id,gq FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} af
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :af {af} .
+source		SELECT id,af FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} info
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :info {info} .
+source		SELECT id,info FROM {{VcfInfTable}}
+
+mappingId	{{VcfInfTable}} detail
+target		<http://dbtss.hgc.jp/rdf/data#{{VcfInfTable}}/{id}> :detail {detail} .
+source		SELECT id,detail FROM {{VcfInfTable}}
+[/VcfInfTable]
+
+[WRnaseqTable]
+mappingId	{{WRnaseqTable}} id
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> a :{{WRnaseqTable}} .
+source		SELECT id FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} group_id
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :group_id {group_id} .
+source		SELECT id,group_id FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} name
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :name {name} .
+source		SELECT id,name FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} chr
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :chr {chr} .
+source		SELECT id,chr FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} strand
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :strand {strand} .
+source		SELECT id,strand FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} utr_start
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :utr_start {utr_start} .
+source		SELECT id,utr_start FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} utr_end
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :utr_end {utr_end} .
+source		SELECT id,utr_end FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} cds_start
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :cds_start {cds_start} .
+source		SELECT id,cds_start FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} cds_end
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :cds_end {cds_end} .
+source		SELECT id,cds_end FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} exn_starts
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :exn_starts {exn_starts} .
+source		SELECT id,exn_starts FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} exn_ends
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :exn_ends {exn_ends} .
+source		SELECT id,exn_ends FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} symbol
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :symbol {symbol} .
+source		SELECT id,symbol FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} step
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :step {step} .
+source		SELECT id,step FROM {{WRnaseqTable}}
+
+mappingId	{{WRnaseqTable}} geneid
+target		<http://dbtss.hgc.jp/rdf/data#{{WRnaseqTable}}/{id}> :geneid {geneid} .
+source		SELECT id,geneid FROM {{WRnaseqTable}}
+[/WRnaseqTable]
+\]\]

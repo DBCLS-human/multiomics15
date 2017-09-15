@@ -1,0 +1,46 @@
+{
+  "@context": {
+    "stanza": "http://togostanza.org/resource/stanza#"
+  },
+  "@id": "beacon",
+  "stanza:label": "Beacon",
+  "stanza:definition": "Judging if the specified allele is specified.",
+  "stanza:parameter": [
+      {
+	  "stanza:key": "sample",
+	  "stanza:example": "TSE000086, LC2/ad",
+	  "stanza:description": "Example name or ID",
+	  "stanza:required": true
+      },
+      {
+	  "stanza:key": "chromosome",
+	  "stanza:example": "1",
+	  "stanza:description": "Chromosome number",
+	  "stanza:required": true
+      },
+      {
+	  "stanza:key": "position",
+	  "stanza:example": "10234",
+	  "stanza:description": "Allele position",
+	  "stanza:required": true
+      },
+      {
+	  "stanza:key": "allele",
+	  "stanza:example": "T",
+	  "stanza:description": "Allele",
+	  "stanza:required": true
+      }
+  ],
+  "stanza:usage": "<togostanza-beacon sample=\"LC2/ad\" chromosome=\"1\" position=\"10234\" allele=\"T\"></togostanza-beacon>",
+  "stanza:type": "Stanza",
+  "stanza:context": "",
+  "stanza:display": "",
+  "stanza:provider": "DBCLS",
+  "stanza:license": "",
+  "stanza:author": "DBCLS, S.Tanaka",
+  "stanza:address": "",
+  "stanza:contributor": [
+  ],
+  "stanza:created": "2016-02-22",
+  "stanza:updated": "2016-02-22"
+}

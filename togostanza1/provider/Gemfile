@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'togostanza'
+gem 'unicorn'
+gem 'allele_stanza', path: './allele_stanza'
+gem 'snv_stanza', path: './snv_stanza'
+gem 'beacon_stanza', path: './beacon_stanza'

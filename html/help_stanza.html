@@ -1,0 +1,289 @@
+<html>
+  <head>
+    <title>SPARQL検索 Stanza - humanrdf.dbcls.jp</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/dbcls.css"
+  </head>
+  <body>
+     <header>
+         <h1><a class="header" href="http://humanrdf.dbcls.jp/">humanrdf.dbcls.jp</a></h1>
+     </header>
+     <article>
+       <h1>SPAQL検索 Stanza</h1>
+       <section>
+         <h1>目次</h1>
+         <ul>
+           <li><a href="#first">はじめに</a></li>
+           <li><a href="#functions">機能一覧</a></li>
+           <li><a href="#allele">指定位置アレル表示 (allele)</a></li>
+           <li><a href="#beacon">指定アレル存在判定 (beacon)</a></li>
+           <li><a href="#snv">指定区間SNV一覧表示 (snv)</a></li>
+         </ul>
+       </section>
+       <section>
+          <a name="first"></a>
+          <h1>はじめに</h1>
+          <p>
+             ここでは、DBCLS が提供する TogoStanza を用いて開発した、
+             SPARQL 検索機能について記述する。
+          </p>
+       </section>
+       <section>
+         <a name="functions"></a>
+         <h1>機能一覧</h1>
+         <p>ここで提供している機能には以下のものが存在する。</p>
+         <table>
+           <tr>
+             <th>名前</th>
+             <th>説明</th>
+           </tr>
+           <tr>
+             <td>allele</td>
+             <td>指定位置の Allele を表示する。</td>
+           </tr>
+           <tr>
+             <td>beacon</td>
+             <td>指定 Allele が存在するかを判定する。</td>
+           </tr>
+           <tr>
+             <td>snv</td>
+             <td>指定区間の SNV 一覧を取得する。</td>
+           </tr>
+         </table>
+         <p>以下の章ではそれぞれの機能について説明を行なう。</p>
+       </section>
+       <section>
+         <a name="allele"></a>
+         <h1>指定位置アレル表示 (allele)</h1>
+         <p>本機能はユーザーが指定した位置のアレルを表示する。</p>
+         <p>入出力は以下の通り。</p>
+         <h2>入力</h2>
+         <table>
+           <tr>
+             <th>パラメータ名</th>
+             <th>説明</th>
+           </tr>
+           <tr>
+             <td>sample</td>
+             <td>サンプル名。(e.g., LC2/ad, TSE000086)</td>
+           </tr>
+           <tr>
+             <td>chromosome</td>
+             <td>染色体番号。(e.g., 1, 2, X, Y)</td>
+           </tr>
+           <tr>
+             <td>position</td>
+             <td>位置。 (e.g., 10234)</td>
+           </tr>
+         </table>
+         <h2>出力</h2>
+         <p>指定位置の Reference Allele および Alternative Allele。</p>
+         <h2>使用方法</h2>
+         <p>
+           まずは、Stanza を利用可能にする為の設定として
+           &lt;head&gt; タグの中に以下のコードを埋め込む。
+         </p>
+         <pre>
+           <code>
+    &lt;link rel="import" href="http://humanrdf.dbcls.jp/togostanza2/allele/"&gt;
+           </code>
+         </pre>
+         <p>
+           そして &lt;body&gt;タグの結果を表示したい部分に
+           以下のコードを埋め込む。
+         </p>
+         <pre>
+           <code>
+    &lt;togostanza-allele sample="(サンプル名)" chromosome="(染色体番号)" position="(位置)"&gt;&lt;/togostanza-allele&gt;
+           </code>
+         </pre>
+         <p>
+           簡単な例としては以下の様なコードになる。
+         </p>
+           <pre>
+             <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Stanza (Allele) Demo&lt;/title&gt;
+    &lt;meta charset="utf-8"&gt;
+
+    &lt;!--  インポート --&gt;
+    &lt;link rel="import" href="http://humanrdf.dbcls.jp/togostanza2/allele/"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Stanza (Allele) 埋め込み例&lt;/h1&gt;
+
+    &lt;!--  Stanza --&gt;
+    &lt;togostanza-allele sample="LC2/ad" chromosome="1" position="10234"&gt;&lt;/togostanza-allele&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+           </code>
+         </pre>
+         <p>上記のコードでは以下の様な画面が表示される。</p>
+         <div>
+           <img class="capture" src="images/stanza_allele_demo_result00.jpeg">
+         </div>
+       </section>
+       <section>
+         <a name="beacon"></a>
+         <h1>指定アレル存在判定 (beacon)</h1>
+         <p>本機能はユーザーが指定したアレル(Alternative Allele)が
+            存在するか否かを判定する。</p>
+         <p>入出力は以下の通り。</p>
+         <h2>入力</h2>
+         <table>
+           <tr>
+             <th>パラメータ名</th>
+             <th>説明</th>
+           </tr>
+           <tr>
+             <td>sample</td>
+             <td>サンプル名。(e.g., LC2/ad, TSE000086)</td>
+           </tr>
+           <tr>
+             <td>chromosome</td>
+             <td>染色体番号。(e.g., 1, 2, X, Y)</td>
+           </tr>
+           <tr>
+             <td>position</td>
+             <td>位置。 (e.g., 10234)</td>
+           </tr>
+           <tr>
+             <td>allele</td>
+             <td>Alternative Allele</td>
+           </tr>
+         </table>
+         <h2>出力</h2>
+         <p>Existing or Not Existing</p>
+         <p>指定した Alternative Allele が存在すれば true</p>
+         <h2>使用方法</h2>
+         <p>
+           まずは、Stanza を利用可能にする為の設定として
+           &lt;head&gt; タグの中に以下のコードを埋め込む。
+         </p>
+         <pre>
+           <code>
+    &lt;link rel="import" href="http://humanrdf.dbcls.jp/togostanza2/beacon/"&gt;
+           </code>
+         </pre>
+         <p>
+           そして &lt;body&gt;タグの結果を表示したい部分に
+           以下のコードを埋め込む。
+         </p>
+         <pre>
+           <code>
+    &lt;togostanza-beacon sample="(サンプル名)" chromosome="(染色体番号)" position="(位置)" allele="(Alternative Allele)"&gt;&lt;/togostanza-beacon&gt;
+           </code>
+         </pre>
+         <p>
+           簡単な例としては以下の様なコードになる。
+         </p>
+           <pre>
+             <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Stanza (Beacon) Demo&lt;/title&gt;
+    &lt;meta charset="utf-8"&gt;
+
+    &lt;!--  インポート --&gt;
+    &lt;link rel="import" href="http://humanrdf.dbcls.jp/togostanza2/beacon/"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Stanza (Beacon) 埋め込み例&lt;/h1&gt;
+
+    &lt;!--  Stanza --&gt;
+    &lt;togostanza-beacon sample="LC2/ad" chromosome="1" position="10234" allele="T"&gt;&lt;/togostanza-beacon&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+           </code>
+         </pre>
+         <p>上記のコードでは以下の様な画面が表示される。</p>
+         <div>
+           <img class="capture" src="images/stanza_beacon_demo_result00.jpeg">
+         </div>
+       </section>
+       <section>
+         <a name="snv"></a>
+         <h1>指定区間SNV一覧表示 (snv)</h1>
+         <p>本機能はユーザーが指定した範囲の SNV 一覧を表示する。</p>
+         <p>入出力は以下の通り。</p>
+         <h2>入力</h2>
+         <table>
+           <tr>
+             <th>パラメータ名</th>
+             <th>説明</th>
+           </tr>
+           <tr>
+             <td>sample</td>
+             <td>サンプル名。(e.g., LC2/ad, TSE000086)</td>
+           </tr>
+           <tr>
+             <td>chromosome</td>
+             <td>染色体番号。(e.g., 1, 2, X, Y)</td>
+           </tr>
+           <tr>
+             <td>range_start</td>
+             <td>指定範囲、開始位置。 (e.g., 10000)</td>
+           </tr>
+           <tr>
+             <td>range_end</td>
+             <td>指定範囲、終了位置。 (e.g., 11000)</td>
+           </tr>
+         </table>
+         <h2>出力</h2>
+         <p>指定範囲に存在する SNV の個数、および各々の SNV の位置、Reference Allele, Alternative Allele</p>
+         <h2>使用方法</h2>
+         <p>
+           まずは、Stanza を利用可能にする為の設定として
+           &lt;head&gt; タグの中に以下のコードを埋め込む。
+         </p>
+         <pre>
+           <code>
+    &lt;link rel="import" href="http://humanrdf.dbcls.jp/togostanza2/snv/"&gt;
+           </code>
+         </pre>
+         <p>
+           そして &lt;body&gt;タグの結果を表示したい部分に
+           以下のコードを埋め込む。
+         </p>
+         <pre>
+           <code>
+    &lt;togostanza-snv sample="(サンプル名)" chromosome="(染色体番号)" range_start="(指定範囲開始位置)" range_end="(指定範囲終了位置)"&gt;&lt;/togostanza-snv&gt;
+           </code>
+         </pre>
+         <p>
+           簡単な例としては以下の様なコードになる。
+         </p>
+           <pre>
+             <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Stanza (SNV) Demo&lt;/title&gt;
+    &lt;meta charset="utf-8"&gt;
+
+    &lt;!--  インポート --&gt;
+    &lt;link rel="import" href="http://humanrdf.dbcls.jp/togostanza2/snv/"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Stanza (SNV) 埋め込み例&lt;/h1&gt;
+
+    &lt;!--  Stanza --&gt;
+    &lt;togostanza-snv sample="LC2/ad" chromosome="1" range_start="10000" range_end="11000"&gt;&lt;/togostanza-snv&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+           </code>
+         </pre>
+         <p>上記のコードでは以下の様な画面が表示される。</p>
+         <div>
+           <img class="capture" src="images/stanza_snv_demo_result00.jpeg">
+         </div>
+       </section>
+     </article>
+     <footer>
+       Copyright (C) 2016 DBCLS All rights reserved.
+     </footer>
+  </body>
+</html>
