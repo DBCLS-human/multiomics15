@@ -31,7 +31,7 @@ GEM
     flavour_saver (0.3.8)
       rltk (~> 2.2.0)
       tilt
-    haml (4.0.7)
+    haml (5.0.0)
       tilt
     hashie (3.4.3)
     i18n (0.7.0)
